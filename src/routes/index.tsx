@@ -615,16 +615,16 @@ function Index() {
                   </div>
                   <div className="mt-6 space-y-3">
                     {[
-                      ["Przychód planowany", "5,8 mln zł", true],
-                      ["Budżet wykorzystany", "74%", false],
-                      ["Ryzyka otwarte", "03", false],
-                    ].map(([label, value, brand]) => (
+                      { label: "Przychód planowany", value: "5,8 mln zł", brand: true },
+                      { label: "Budżet wykorzystany", value: "74%", brand: false },
+                      { label: "Ryzyka otwarte", value: "03", brand: false },
+                    ].map((item) => (
                       <div
-                        key={label}
-                        className={`rounded-2xl border px-4 py-4 ${brand ? "border-brand/25 bg-brand-soft" : "border-border bg-background/60"}`}
+                        key={item.label}
+                        className={`rounded-2xl border px-4 py-4 ${item.brand ? "border-brand/25 bg-brand-soft" : "border-border bg-background/60"}`}
                       >
-                        <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{label}</div>
-                        <div className="mt-2 text-xl font-semibold text-foreground">{value}</div>
+                        <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{item.label}</div>
+                        <div className="mt-2 text-xl font-semibold text-foreground">{item.value}</div>
                       </div>
                     ))}
                   </div>
