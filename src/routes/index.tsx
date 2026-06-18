@@ -15,6 +15,7 @@ import {
   TrendingUp,
   Wallet,
 } from "lucide-react";
+import estatsLogo from "@/assets/estats-logo.png.asset.json";
 
 type FadeInProps = {
   children: React.ReactNode;
@@ -219,14 +220,16 @@ function MockMetric({ label, value, tone = "default" }: MockMetricProps) {
 
 function EstatsLogo() {
   return (
-    <div className="flex items-center gap-3">
-      <div className="estats-panel estats-spotlight grid h-11 w-11 place-items-center rounded-2xl bg-card/90">
-        <svg viewBox="0 0 72 72" aria-hidden="true" className="h-7 w-7 fill-foreground">
-          <path d="M13 10h46L44 25H25v22h34L44 32H28l15 15H13V10Z" />
-        </svg>
-      </div>
+    <a href="/" className="flex items-center gap-3" aria-label="Estats — strona główna">
+      <img
+        src={estatsLogo.url}
+        alt="Logo Estats"
+        width={44}
+        height={44}
+        className="h-11 w-11 rounded-2xl"
+      />
       <span className="font-display text-xl font-semibold tracking-tight text-foreground">Estats</span>
-    </div>
+    </a>
   );
 }
 
