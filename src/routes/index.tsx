@@ -239,9 +239,7 @@ function EstatsLogo() {
       <img
         src={estatsLogo.url}
         alt="Logo Estats"
-        width={44}
-        height={44}
-        className="h-11 w-11 rounded-2xl"
+        className="h-8 w-auto object-contain sm:h-9"
       />
       <span className="font-display text-xl font-semibold tracking-tight text-foreground">Estats</span>
     </a>
