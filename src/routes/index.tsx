@@ -236,13 +236,14 @@ function MockMetric({ label, value, tone = "default" }: MockMetricProps) {
 function EstatsLogo() {
   return (
     <a href="/" className="flex items-center gap-3" aria-label="Estats — strona główna">
-      <img
-        src={estatsLogo.url}
-        alt="Logo Estats"
-        width={44}
-        height={44}
-        className="h-11 w-11 rounded-2xl"
-      />
+      <div className="h-11 w-11 overflow-hidden rounded-2xl">
+        <img
+          src={estatsLogo.url}
+          alt="Logo Estats"
+          className="h-full w-full object-cover"
+          style={{ imageRendering: '-webkit-optimize-contrast' }}
+        />
+      </div>
       <span className="font-display text-xl font-semibold tracking-tight text-foreground">Estats</span>
     </a>
   );
