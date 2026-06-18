@@ -146,7 +146,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Estats to nowoczesna platforma do zarządzania flipami nieruchomości: finanse, postęp projektu, inwestorzy i aktualizacje w jednym miejscu.",
+          "Estats to nowoczesna platforma SaaS do zarządzania flipami nieruchomości: finanse, postęp projektu, ROI, inwestorzy i aktualizacje z budowy w jednym miejscu.",
       },
       { property: "og:title", content: "Estats — kontrola nad flipem od zakupu do sprzedaży" },
       {
@@ -154,17 +154,32 @@ export const Route = createFileRoute("/")({
         content:
           "Jedno miejsce do śledzenia projektu, kosztów i postępu inwestycji dla flipperów, inwestorów i koordynatorów.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { property: "og:image", content: "/__l5e/assets-v1/05b09d56-d0ec-4896-8666-414f2d45a668/estats-logo.png" },
       { name: "twitter:title", content: "Estats — kontrola nad flipem od zakupu do sprzedaży" },
       {
         name: "twitter:description",
         content:
           "Platforma SaaS do zarządzania flipami nieruchomości z pełną transparentnością dla inwestorów.",
       },
+      { name: "twitter:image", content: "/__l5e/assets-v1/05b09d56-d0ec-4896-8666-414f2d45a668/estats-logo.png" },
     ],
-    links: [
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
       {
-        rel: "canonical",
-        href: "https://id-preview--aaf3674c-5bfc-43a9-942e-be25869f7726.lovable.app/",
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Estats",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          description:
+            "Platforma SaaS do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z budowy.",
+          inLanguage: "pl-PL",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "PLN" },
+        }),
       },
     ],
   }),
