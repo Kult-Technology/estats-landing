@@ -77,23 +77,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Estats — Platforma do zarządzania flipami" },
+      { name: "theme-color", content: "#000000" },
+      { name: "color-scheme", content: "dark light" },
+      { title: "Estats — Platforma do zarządzania flipami nieruchomości" },
       {
         name: "description",
         content:
-          "Estats porządkuje finanse, harmonogram i komunikację wokół flipów nieruchomości w jednym systemie.",
+          "Estats to platforma SaaS do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z budowy w jednym miejscu dla flippera, inwestora i koordynatora.",
+      },
+      {
+        name: "keywords",
+        content:
+          "flipy nieruchomości, zarządzanie flipami, software dla flipperów, tracking projektu nieruchomości, ROI inwestycje, platforma dla inwestorów, Estats",
       },
       { name: "author", content: "Estats" },
-      { property: "og:title", content: "Estats — Platforma do zarządzania flipami" },
+      { name: "robots", content: "index, follow" },
+      { name: "language", content: "Polish" },
+      { property: "og:site_name", content: "Estats" },
+      { property: "og:locale", content: "pl_PL" },
+      { property: "og:type", content: "website" },
+      { property: "og:title", content: "Estats — Platforma do zarządzania flipami nieruchomości" },
       {
         property: "og:description",
         content:
-          "Nowoczesna platforma do śledzenia projektu, kosztów i postępu inwestycji dla flipperów, inwestorów i koordynatorów.",
+          "Tracking projektu, finanse i transparentność dla inwestorów. Wszystko, czego flipperzy potrzebują, w jednym systemie.",
       },
-      { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Estats — Platforma do zarządzania flipami nieruchomości" },
+      {
+        name: "twitter:description",
+        content:
+          "Tracking projektu, finanse i transparentność dla inwestorów w jednym narzędziu SaaS.",
+      },
     ],
     links: [
+      { rel: "icon", type: "image/png", href: "/__l5e/assets-v1/05b09d56-d0ec-4896-8666-414f2d45a668/estats-logo.png" },
+      { rel: "apple-touch-icon", href: "/__l5e/assets-v1/05b09d56-d0ec-4896-8666-414f2d45a668/estats-logo.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

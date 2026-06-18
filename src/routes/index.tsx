@@ -15,6 +15,7 @@ import {
   TrendingUp,
   Wallet,
 } from "lucide-react";
+import estatsLogo from "@/assets/estats-logo.png.asset.json";
 
 type FadeInProps = {
   children: React.ReactNode;
@@ -145,7 +146,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Estats to nowoczesna platforma do zarządzania flipami nieruchomości: finanse, postęp projektu, inwestorzy i aktualizacje w jednym miejscu.",
+          "Estats to nowoczesna platforma SaaS do zarządzania flipami nieruchomości: finanse, postęp projektu, ROI, inwestorzy i aktualizacje z budowy w jednym miejscu.",
       },
       { property: "og:title", content: "Estats — kontrola nad flipem od zakupu do sprzedaży" },
       {
@@ -153,17 +154,32 @@ export const Route = createFileRoute("/")({
         content:
           "Jedno miejsce do śledzenia projektu, kosztów i postępu inwestycji dla flipperów, inwestorów i koordynatorów.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { property: "og:image", content: "/__l5e/assets-v1/05b09d56-d0ec-4896-8666-414f2d45a668/estats-logo.png" },
       { name: "twitter:title", content: "Estats — kontrola nad flipem od zakupu do sprzedaży" },
       {
         name: "twitter:description",
         content:
           "Platforma SaaS do zarządzania flipami nieruchomości z pełną transparentnością dla inwestorów.",
       },
+      { name: "twitter:image", content: "/__l5e/assets-v1/05b09d56-d0ec-4896-8666-414f2d45a668/estats-logo.png" },
     ],
-    links: [
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
       {
-        rel: "canonical",
-        href: "https://id-preview--aaf3674c-5bfc-43a9-942e-be25869f7726.lovable.app/",
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Estats",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          description:
+            "Platforma SaaS do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z budowy.",
+          inLanguage: "pl-PL",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "PLN" },
+        }),
       },
     ],
   }),
@@ -219,14 +235,16 @@ function MockMetric({ label, value, tone = "default" }: MockMetricProps) {
 
 function EstatsLogo() {
   return (
-    <div className="flex items-center gap-3">
-      <div className="estats-panel estats-spotlight grid h-11 w-11 place-items-center rounded-2xl bg-card/90">
-        <svg viewBox="0 0 72 72" aria-hidden="true" className="h-7 w-7 fill-foreground">
-          <path d="M13 10h46L44 25H25v22h34L44 32H28l15 15H13V10Z" />
-        </svg>
-      </div>
+    <a href="/" className="flex items-center gap-3" aria-label="Estats — strona główna">
+      <img
+        src={estatsLogo.url}
+        alt="Logo Estats"
+        width={44}
+        height={44}
+        className="h-11 w-11 rounded-2xl"
+      />
       <span className="font-display text-xl font-semibold tracking-tight text-foreground">Estats</span>
-    </div>
+    </a>
   );
 }
 
