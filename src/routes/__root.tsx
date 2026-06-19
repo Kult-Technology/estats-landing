@@ -12,6 +12,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { OG_IMAGE, OG_IMAGE_ALT } from "../lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -80,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#000000" },
       { name: "color-scheme", content: "dark light" },
-      { title: "Estats - Platforma do zarządzania flipami nieruchomości" },
+      { title: "Estats - platforma do zarządzania flipami nieruchomości" },
       {
         name: "description",
         content:
@@ -97,19 +98,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Estats" },
       { property: "og:locale", content: "pl_PL" },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: "Estats - Platforma do zarządzania flipami nieruchomości" },
+      { property: "og:title", content: "Estats - platforma do zarządzania flipami nieruchomości" },
       {
         property: "og:description",
         content:
           "Tracking projektu, finanse i transparentność dla inwestorów. Wszystko, czego flipperzy potrzebują, w jednym systemie.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Estats - Platforma do zarządzania flipami nieruchomości" },
+      { name: "twitter:title", content: "Estats - platforma do zarządzania flipami nieruchomości" },
       {
         name: "twitter:description",
-        content:
-          "Tracking projektu, finanse i transparentność dla inwestorów w jednym narzędziu SaaS.",
+        content: "Tracking projektu, finanse i transparentność dla inwestorów w jednym systemie.",
       },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:alt", content: OG_IMAGE_ALT },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "twitter:image:alt", content: OG_IMAGE_ALT },
     ],
     links: [
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },

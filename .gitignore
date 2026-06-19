@@ -37,3 +37,6 @@ dist-ssr
 
 # idea stuff
 .idea
+
+# AI stuff
+.claude

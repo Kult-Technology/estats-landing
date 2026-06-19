@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 import { getWaitlistCount, joinWaitlist } from "../lib/api/waitlist.functions";
+import { OG_IMAGE, OG_IMAGE_ALT, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, SITE_URL } from "../lib/seo";
 
 type FadeInProps = {
   children: React.ReactNode;
@@ -147,7 +148,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Estats to nowoczesna platforma SaaS do zarządzania flipami nieruchomości: finanse, postęp projektu, ROI, inwestorzy i aktualizacje z budowy w jednym miejscu.",
+          "Estats to nowoczesna platforma do zarządzania flipami nieruchomości: finanse, postęp projektu, ROI, inwestorzy i aktualizacje z budowy w jednym miejscu.",
       },
       { property: "og:title", content: "Estats - kontrola nad flipem od zakupu do sprzedaży" },
       {
@@ -156,17 +157,27 @@ export const Route = createFileRoute("/")({
           "Jedno miejsce do śledzenia projektu, kosztów i postępu inwestycji dla flipperów, inwestorów i koordynatorów.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
-      { property: "og:image", content: "/favicon-512x512.png" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:secure_url", content: OG_IMAGE },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:width", content: OG_IMAGE_WIDTH },
+      { property: "og:image:height", content: OG_IMAGE_HEIGHT },
+      { property: "og:image:alt", content: OG_IMAGE_ALT },
       { name: "twitter:title", content: "Estats - kontrola nad flipem od zakupu do sprzedaży" },
       {
         name: "twitter:description",
         content:
-          "Platforma SaaS do zarządzania flipami nieruchomości z pełną transparentnością dla inwestorów.",
+          "Platforma do zarządzania flipami nieruchomości z pełną transparentnością dla inwestorów.",
       },
-      { name: "twitter:image", content: "/favicon-512x512.png" },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "twitter:image:alt", content: OG_IMAGE_ALT },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
+      { rel: "alternate", hrefLang: "pl-PL", href: `${SITE_URL}/` },
+      { rel: "alternate", hrefLang: "x-default", href: `${SITE_URL}/` },
+    ],
     scripts: [
       {
         type: "application/ld+json",
@@ -174,12 +185,29 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
           name: "Estats",
+          url: SITE_URL,
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web",
           description:
-            "Platforma SaaS do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z budowy.",
+            "Platforma do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z budowy.",
           inLanguage: "pl-PL",
+          image: OG_IMAGE,
           offers: { "@type": "Offer", price: "0", priceCurrency: "PLN" },
+          publisher: {
+            "@type": "Organization",
+            name: "Kult Technology",
+            url: "https://kulttechnology.pl",
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Estats",
+          url: SITE_URL,
+          inLanguage: "pl-PL",
         }),
       },
     ],
@@ -561,8 +589,8 @@ function Index() {
         <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
           <div className="max-w-2xl">
             <FadeIn className="space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+              <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-[0.65rem] font-medium uppercase leading-tight tracking-[0.1em] text-muted-foreground sm:text-xs sm:tracking-[0.18em]">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
                 Platforma dla flipów nieruchomości
               </div>
 
