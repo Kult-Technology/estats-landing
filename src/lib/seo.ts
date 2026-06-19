@@ -4,10 +4,9 @@
 
 export const SITE_URL = "https://estats.pl";
 
-// Social share image. Ideally a dedicated 1200x630 PNG at /og-image.png; until
-// one is added we point at the existing 512x512 brand icon (it still renders,
-// just center-cropped on large cards).
-export const OG_IMAGE = `${SITE_URL}/favicon-512x512.png`;
-export const OG_IMAGE_WIDTH = "512";
-export const OG_IMAGE_HEIGHT = "512";
+// Social share image: a dedicated 1200x630 card (public/og-image.png) rendered
+// from the site's own brand (dark theme, brand blue, real logo + headline).
+export const OG_IMAGE = `${SITE_URL}/og-image.png`;
+export const OG_IMAGE_WIDTH = "1200";
+export const OG_IMAGE_HEIGHT = "630";
 export const OG_IMAGE_ALT = "Estats - platforma do zarządzania flipami nieruchomości";
