@@ -15,7 +15,7 @@ import {
   TrendingUp,
   Wallet,
 } from "lucide-react";
-import estatsLogo from "@/assets/estats-logo.png.asset.json";
+
 
 type FadeInProps = {
   children: React.ReactNode;
