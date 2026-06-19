@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Estats to platforma SaaS do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z budowy w jednym miejscu dla flippera, inwestora i koordynatora.",
+          "Estats to platforma do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z remontów w jednym miejscu dla flippera, inwestora i koordynatora.",
       },
       {
         name: "keywords",

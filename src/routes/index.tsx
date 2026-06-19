@@ -8,6 +8,7 @@ import {
   Building2,
   Camera,
   CheckCircle2,
+  ChevronDown,
   ChevronRight,
   Clock3,
   HandCoins,
@@ -73,7 +74,7 @@ const features = [
   },
   {
     icon: Camera,
-    title: "Aktualizacje z budowy bez tarcia",
+    title: "Aktualizacje z remontów bez tarcia",
     copy: "Koordynator dodaje zdjęcia, statusy i zadania w prostym rytmie pracy, a reszta zespołu widzi efekty natychmiast.",
   },
 ];
@@ -104,7 +105,7 @@ const roles = [
     subtitle: "Widok szybki i mobilny",
     icon: Clock3,
     bullets: [
-      "duże akcje i proste aktualizacje z budowy",
+      "duże akcje i proste aktualizacje z remontów",
       "timeline, zadania i terminy w jednym miejscu",
       "zdjęcia i statusy dodawane bez opóźnień",
     ],
@@ -125,12 +126,12 @@ const timelineSteps = [
   {
     step: "03",
     title: "Budżet kontra rzeczywistość",
-    copy: "Koszty są widoczne na bieżąco, więc wiesz szybciej, gdzie projekt zjada marżę albo nabiera tempa.",
+    copy: "Koszty są widoczne na bieżąco, a inwestor przez cały proces ma wgląd w finanse projektu - łatwiej wyłapać, gdzie flip zjada marżę albo nabiera tempa.",
   },
   {
     step: "04",
     title: "Sprzedaż i rozliczenie",
-    copy: "Na końcu zostaje przejrzysta historia projektu - przydatna dla inwestora, zespołu i kolejnych flipów.",
+    copy: "Po sprzedaży mieszkania inwestor może wygenerować raport z kompletem danych z projektu, a jego przejrzysta historia zostaje na kolejne flipy.",
   },
 ];
 
@@ -148,7 +149,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Estats to nowoczesna platforma do zarządzania flipami nieruchomości: finanse, postęp projektu, ROI, inwestorzy i aktualizacje z budowy w jednym miejscu.",
+          "Estats to nowoczesna platforma do zarządzania flipami nieruchomości: finanse, postęp projektu, ROI, inwestorzy i aktualizacje z remontów w jednym miejscu.",
       },
       { property: "og:title", content: "Estats - kontrola nad flipem od zakupu do sprzedaży" },
       {
@@ -189,7 +190,7 @@ export const Route = createFileRoute("/")({
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web",
           description:
-            "Platforma do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z budowy.",
+            "Platforma do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z remontów.",
           inLanguage: "pl-PL",
           image: OG_IMAGE,
           offers: { "@type": "Offer", price: "0", priceCurrency: "PLN" },
@@ -296,26 +297,6 @@ function DashboardMockup() {
       transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
       className="relative mx-auto w-full max-w-3xl"
     >
-      <motion.div
-        animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -left-8 top-10 hidden rounded-2xl border border-border bg-card/75 px-4 py-3 text-sm text-muted-foreground shadow-2xl lg:block"
-      >
-        <div className="mb-2 flex items-center gap-2 text-foreground">
-          <BadgeCheck className="h-4 w-4 text-brand" />
-          Opóźnienie wykryte wcześniej
-        </div>
-        <div>Korekta harmonogramu przed wzrostem kosztów.</div>
-      </motion.div>
-      <motion.div
-        animate={reduceMotion ? undefined : { y: [0, 12, 0] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-        className="absolute -right-6 bottom-14 hidden rounded-2xl border border-brand/20 bg-brand-soft px-4 py-3 text-sm text-foreground shadow-2xl xl:block"
-      >
-        <div className="mb-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">ROI</div>
-        <div className="text-lg font-semibold">+18,4%</div>
-      </motion.div>
-
       <div className="estats-panel estats-shimmer relative overflow-hidden rounded-[2rem] p-3 sm:p-4">
         <div className="flex items-center justify-between rounded-[1.4rem] border border-border/70 bg-card/70 px-4 py-3">
           <div>
@@ -599,7 +580,7 @@ function Index() {
                   Kontroluj każdy etap flipa w jednym systemie.
                 </h1>
                 <p className="max-w-xl text-lg leading-8 text-muted-foreground sm:text-xl">
-                  Estats łączy tracking projektu, finanse, dokumenty i aktualizacje z budowy w
+                  Estats łączy tracking projektu, finanse, dokumenty i aktualizacje z remontów w
                   jednym uporządkowanym widoku dla flippera, inwestora i koordynatora.
                 </p>
               </div>
@@ -717,7 +698,7 @@ function Index() {
             <SectionHeading
               eyebrow="Widoki dla każdej roli"
               title="Każda rola widzi tylko to, czego naprawdę potrzebuje."
-              copy="Estats nie próbuje zmusić wszystkich do jednego dashboardu. Widok flippera jest gęsty i decyzyjny, inwestora - klarowny i zaufaniowy, a koordynatora - szybki i mobilny."
+              copy="Estats nie próbuje zmusić wszystkich do jednego dashboardu. Widok flippera jest gęsty i decyzyjny, inwestora - klarowny i wzbudzający zaufanie, a koordynatora - szybki i mobilny."
             />
           </FadeIn>
 
@@ -764,7 +745,7 @@ function Index() {
             <SectionHeading
               eyebrow="Przepływ projektu"
               title="Od zakupu do sprzedaży - jeden rytm pracy zamiast dziesięciu narzędzi."
-              copy="Projekt nie rozjeżdża się między Excelem, komunikatorem i zdjęciami z budowy. W Estats każda decyzja i każdy update trafia do wspólnego przebiegu projektu."
+              copy="Sam decydujesz, czy prowadzisz flip w pojedynkę, czy z zespołem - inwestorem i koordynatorem. Estats działa tak samo dobrze solo, jak i przy wielu osobach, a każda decyzja, aktualizacja i zdjęcie z remontów trafiają do wspólnego przebiegu projektu zamiast ginąć w Excelu i komunikatorach."
             />
           </FadeIn>
 
@@ -911,6 +892,39 @@ function Index() {
 
           <FadeIn delay={0.1} className="mt-10">
             <WaitlistForm initialCount={waitlistCount} />
+          </FadeIn>
+
+          <FadeIn delay={0.15} className="mt-6">
+            <details className="group mx-auto max-w-3xl">
+              <summary className="flex cursor-pointer list-none flex-wrap items-center justify-center gap-x-1.5 text-center text-xs text-muted-foreground transition-colors hover:text-foreground [&::-webkit-details-marker]:hidden">
+                <span>
+                  Administratorem Twoich danych jest{" "}
+                  <span className="font-medium text-foreground">Kult Technology sp. z o.o.</span>
+                </span>
+                <span className="inline-flex shrink-0 items-center gap-1 text-foreground/70">
+                  <span className="group-open:hidden">Szczegóły</span>
+                  <span className="hidden group-open:inline">Zwiń</span>
+                  <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
+                </span>
+              </summary>
+              <p className="mx-auto mt-3 max-w-3xl text-center text-xs leading-5 text-muted-foreground">
+                Zapisując się na listę oczekujących, wyrażasz zgodę na przetwarzanie Twojego adresu
+                e-mail przez Kult Technology sp. z o.o. - administratora Twoich danych osobowych - w
+                celu poinformowania Cię o starcie i wczesnym dostępie do Estats (podstawa prawna:
+                art. 6 ust. 1 lit. a RODO). Podanie adresu jest dobrowolne, a zgodę możesz wycofać w
+                każdej chwili, pisząc na{" "}
+                <a
+                  href="mailto:kontakt@kulttechnology.pl"
+                  className="underline underline-offset-2 transition-colors hover:text-foreground"
+                >
+                  kontakt@kulttechnology.pl
+                </a>
+                , co nie wpływa na zgodność z prawem przetwarzania sprzed wycofania. Masz prawo
+                dostępu do danych, ich sprostowania, usunięcia lub ograniczenia przetwarzania oraz
+                wniesienia skargi do Prezesa UODO. Dane przechowujemy do czasu wycofania zgody lub
+                zakończenia zapisów na listę oczekujących.
+              </p>
+            </details>
           </FadeIn>
         </div>
       </section>
