@@ -16,7 +16,6 @@ import {
   Wallet,
 } from "lucide-react";
 
-
 type FadeInProps = {
   children: React.ReactNode;
   className?: string;
@@ -52,27 +51,23 @@ const trustItems = [
 const features = [
   {
     icon: Layers3,
-    title: "Tracking projektu od zakupu do sprzedaży",
-    copy:
-      "Każdy etap flipa jest widoczny w jednym przepływie: harmonogram, status, dokumenty, zdjęcia i odpowiedzialne osoby.",
+    title: "Śledzenie projektu od zakupu do sprzedaży",
+    copy: "Każdy etap flipa jest widoczny w jednym przepływie: harmonogram, status, dokumenty, zdjęcia i odpowiedzialne osoby.",
   },
   {
     icon: Wallet,
     title: "Finanse bez ukrytych luk",
-    copy:
-      "Budżet, koszty, prognoza zysku i odchylenia od planu są zawsze pod ręką — bez ręcznego sklejania danych z kilku źródeł.",
+    copy: "Budżet, koszty, prognoza zysku i odchylenia od planu są zawsze pod ręką - bez ręcznego sklejania danych z kilku źródeł.",
   },
   {
     icon: ShieldCheck,
     title: "Transparentność dla inwestora",
-    copy:
-      "Inwestor widzi postęp, kapitał, ROI i kluczowe aktualizacje bez dostępu do nadmiarowej operacyjnej złożoności.",
+    copy: "Inwestor widzi postęp, kapitał, ROI i kluczowe aktualizacje bez dostępu do nadmiarowej operacyjnej złożoności.",
   },
   {
     icon: Camera,
     title: "Aktualizacje z budowy bez tarcia",
-    copy:
-      "Koordynator dodaje zdjęcia, statusy i zadania w prostym rytmie pracy, a reszta zespołu widzi efekty natychmiast.",
+    copy: "Koordynator dodaje zdjęcia, statusy i zadania w prostym rytmie pracy, a reszta zespołu widzi efekty natychmiast.",
   },
 ];
 
@@ -82,9 +77,9 @@ const roles = [
     subtitle: "Widok operacyjny i finansowy",
     icon: Building2,
     bullets: [
-      "portfel projektów, alerty i quick actions",
-      "pełna kontrola kosztów i marży",
-      "zarządzanie spółkami, inwestorami i dokumentami",
+      "portfel projektów, inwestycji i zespołów",
+      "pełna kontrola kosztów i zysków",
+      "zarządzanie firmami, inwestorami i dokumentami",
     ],
   },
   {
@@ -93,7 +88,7 @@ const roles = [
     icon: HandCoins,
     bullets: [
       "czytelny ROI, kapitał i prognoza zysku",
-      "postęp projektu bez zbędnego clutteru",
+      "postęp projektu bez zbędnych informacji",
       "raportowanie gotowe do udostępnienia",
     ],
   },
@@ -112,13 +107,13 @@ const roles = [
 const timelineSteps = [
   {
     step: "01",
-    title: "Zakup i setup projektu",
-    copy: "Estats porządkuje strukturę projektu, spółkę, finansowanie i założenia marży od pierwszego dnia.",
+    title: "Zakup i konfiguracja projektu",
+    copy: "Estats porządkuje strukturę projektu, zespół, finansowanie i założenia marży od pierwszego dnia.",
   },
   {
     step: "02",
     title: "Remont i aktualizacje z placu",
-    copy: "Każdy update, zdjęcie i przesunięcie terminu trafia do wspólnego strumienia, zamiast ginąć w wiadomościach.",
+    copy: "Każda aktualizacja, zdjęcie i przesunięcie terminu trafia do wspólnego strumienia, zamiast ginąć w wiadomościach.",
   },
   {
     step: "03",
@@ -128,7 +123,7 @@ const timelineSteps = [
   {
     step: "04",
     title: "Sprzedaż i rozliczenie",
-    copy: "Na końcu zostaje przejrzysta historia projektu — przydatna dla inwestora, zespołu i kolejnych flipów.",
+    copy: "Na końcu zostaje przejrzysta historia projektu - przydatna dla inwestora, zespołu i kolejnych flipów.",
   },
 ];
 
@@ -142,13 +137,13 @@ const showcaseStats = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Estats — kontrola nad flipem od zakupu do sprzedaży" },
+      { title: "Estats - kontrola nad flipem od zakupu do sprzedaży" },
       {
         name: "description",
         content:
           "Estats to nowoczesna platforma SaaS do zarządzania flipami nieruchomości: finanse, postęp projektu, ROI, inwestorzy i aktualizacje z budowy w jednym miejscu.",
       },
-      { property: "og:title", content: "Estats — kontrola nad flipem od zakupu do sprzedaży" },
+      { property: "og:title", content: "Estats - kontrola nad flipem od zakupu do sprzedaży" },
       {
         property: "og:description",
         content:
@@ -157,7 +152,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { property: "og:image", content: "/favicon-512x512.png" },
-      { name: "twitter:title", content: "Estats — kontrola nad flipem od zakupu do sprzedaży" },
+      { name: "twitter:title", content: "Estats - kontrola nad flipem od zakupu do sprzedaży" },
       {
         name: "twitter:description",
         content:
@@ -235,7 +230,7 @@ function MockMetric({ label, value, tone = "default" }: MockMetricProps) {
 
 function EstatsLogo() {
   return (
-    <a href="/" className="flex items-center gap-3" aria-label="Estats — strona główna">
+    <a href="/" className="flex items-center gap-3" aria-label="Estats - strona główna">
       <img
         src="/estats-icon.png"
         alt="Logo Estats"
@@ -243,7 +238,9 @@ function EstatsLogo() {
         height="1024"
         className="h-8 w-8 shrink-0 object-contain sm:h-9 sm:w-9"
       />
-      <span className="font-display text-xl font-semibold tracking-tight text-foreground">Estats</span>
+      <span className="font-display text-xl font-semibold tracking-tight text-foreground">
+        Estats
+      </span>
     </a>
   );
 }
@@ -282,7 +279,9 @@ function DashboardMockup() {
         <div className="flex items-center justify-between rounded-[1.4rem] border border-border/70 bg-card/70 px-4 py-3">
           <div>
             <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Projekt</div>
-            <div className="mt-1 text-lg font-semibold text-foreground">Warszawa / Mokotów / M-47</div>
+            <div className="mt-1 text-lg font-semibold text-foreground">
+              Warszawa / Mokotów / M-47
+            </div>
           </div>
           <div className="rounded-full border border-brand/20 bg-brand-soft px-3 py-1 text-xs font-medium text-foreground">
             Remont w toku
@@ -293,7 +292,9 @@ function DashboardMockup() {
           <div className="space-y-3 rounded-[1.5rem] border border-border/70 bg-card/65 p-4">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Portfel</div>
+                <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Portfel
+                </div>
                 <div className="mt-1 font-medium text-foreground">Aktywne projekty</div>
               </div>
               <Building2 className="h-4 w-4 text-muted-foreground" />
@@ -313,7 +314,9 @@ function DashboardMockup() {
                 <div className="flex items-center justify-between gap-3">
                   <div>
                     <div className="text-sm font-medium text-foreground">{name}</div>
-                    <div className="mt-1 text-xs text-muted-foreground">Ostatnia aktualizacja 2h temu</div>
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      Ostatnia aktualizacja 2h temu
+                    </div>
                   </div>
                   <span className="rounded-full border border-border px-2 py-1 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                     {status}
@@ -326,7 +329,9 @@ function DashboardMockup() {
           <div className="space-y-3 rounded-[1.5rem] border border-border/70 bg-card/65 p-4">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Timeline</div>
+                <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Timeline
+                </div>
                 <div className="mt-1 font-medium text-foreground">Widoczność postępu projektu</div>
               </div>
               <Sparkles className="h-4 w-4 text-brand" />
@@ -338,7 +343,10 @@ function DashboardMockup() {
                 ["Wykończenie", "54%"],
                 ["Przygotowanie do sprzedaży", "22%"],
               ].map(([label, progress], index) => (
-                <div key={label} className="rounded-2xl border border-border/70 bg-background/55 px-3 py-3">
+                <div
+                  key={label}
+                  className="rounded-2xl border border-border/70 bg-background/55 px-3 py-3"
+                >
                   <div className="mb-2 flex items-center justify-between gap-3 text-sm">
                     <span className="font-medium text-foreground">{label}</span>
                     <span className="text-muted-foreground">{progress}</span>
@@ -347,7 +355,11 @@ function DashboardMockup() {
                     <motion.div
                       initial={reduceMotion ? undefined : { width: 0 }}
                       animate={reduceMotion ? undefined : { width: progress }}
-                      transition={{ delay: 0.5 + index * 0.16, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{
+                        delay: 0.5 + index * 0.16,
+                        duration: 0.9,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                       className="estats-pulse-line h-full rounded-full bg-primary"
                     />
                   </div>
@@ -433,7 +445,8 @@ function Index() {
                   Kontroluj każdy etap flipa w jednym systemie.
                 </h1>
                 <p className="max-w-xl text-lg leading-8 text-muted-foreground sm:text-xl">
-                  Estats łączy tracking projektu, finanse, dokumenty i aktualizacje z budowy w jednym uporządkowanym widoku dla flippera, inwestora i koordynatora.
+                  Estats łączy tracking projektu, finanse, dokumenty i aktualizacje z budowy w
+                  jednym uporządkowanym widoku dla flippera, inwestora i koordynatora.
                 </p>
               </div>
 
@@ -501,7 +514,7 @@ function Index() {
             <SectionHeading
               eyebrow="Projekt tracking first"
               title="Najpierw widzisz postęp. Potem wszystko inne zaczyna się zgadzać."
-              copy="Pierwsze sekundy w Estats mają odpowiedzieć na jedno pytanie: co dzieje się z projektem teraz. Dlatego tracking, status i ryzyka są na pierwszym planie — zanim wejdziesz głębiej w finanse i dokumenty."
+              copy="Pierwsze sekundy w Estats mają odpowiedzieć na jedno pytanie: co dzieje się z projektem teraz. Dlatego postęp projektu, status i zużycie budżetu są na pierwszym planie - zanim wejdziesz głębiej w finanse i dokumenty."
             />
           </FadeIn>
 
@@ -515,9 +528,13 @@ function Index() {
                       <span className="grid h-12 w-12 place-items-center rounded-2xl border border-border bg-background/80 text-brand">
                         <Icon className="h-5 w-5" />
                       </span>
-                      <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">0{index + 1}</span>
+                      <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                        0{index + 1}
+                      </span>
                     </div>
-                    <h3 className="mt-8 text-2xl font-semibold tracking-tight text-foreground">{feature.title}</h3>
+                    <h3 className="mt-8 text-2xl font-semibold tracking-tight text-foreground">
+                      {feature.title}
+                    </h3>
                     <p className="mt-4 text-sm leading-7 text-muted-foreground">{feature.copy}</p>
                   </article>
                 </FadeIn>
@@ -533,7 +550,7 @@ function Index() {
             <SectionHeading
               eyebrow="Role-based UX"
               title="Każda rola widzi tylko to, czego naprawdę potrzebuje."
-              copy="Estats nie próbuje zmusić wszystkich do jednego dashboardu. Widok flippera jest gęsty i decyzyjny, inwestora — klarowny i zaufaniowy, a koordynatora — szybki i mobilny."
+              copy="Estats nie próbuje zmusić wszystkich do jednego dashboardu. Widok flippera jest gęsty i decyzyjny, inwestora - klarowny i zaufaniowy, a koordynatora - szybki i mobilny."
             />
           </FadeIn>
 
@@ -542,11 +559,17 @@ function Index() {
               const Icon = role.icon;
               return (
                 <FadeIn key={role.title} delay={index * 0.1}>
-                  <article className={`rounded-[1.9rem] p-6 ${index === 0 ? "estats-panel-strong" : "estats-panel"}`}>
+                  <article
+                    className={`rounded-[1.9rem] p-6 ${index === 0 ? "estats-panel-strong" : "estats-panel"}`}
+                  >
                     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
                       <div className="min-w-0">
-                        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{role.subtitle}</p>
-                        <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">{role.title}</h3>
+                        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                          {role.subtitle}
+                        </p>
+                        <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
+                          {role.title}
+                        </h3>
                       </div>
                       <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-border bg-background/70 text-brand">
                         <Icon className="h-5 w-5" />
@@ -573,7 +596,7 @@ function Index() {
           <FadeIn>
             <SectionHeading
               eyebrow="Workflow"
-              title="Od zakupu do sprzedaży — jeden rytm pracy zamiast dziesięciu narzędzi."
+              title="Od zakupu do sprzedaży - jeden rytm pracy zamiast dziesięciu narzędzi."
               copy="Projekt nie rozjeżdża się między Excelem, komunikatorem i zdjęciami z budowy. W Estats każda decyzja i każdy update trafia do wspólnego przebiegu projektu."
             />
           </FadeIn>
@@ -584,7 +607,9 @@ function Index() {
                 <article className="estats-panel h-full rounded-[1.75rem] p-6">
                   <div className="text-sm font-semibold text-brand">{step.step}</div>
                   <div className="estats-gradient-line mt-5 h-px w-full" />
-                  <h3 className="mt-5 text-xl font-semibold tracking-tight text-foreground">{step.title}</h3>
+                  <h3 className="mt-5 text-xl font-semibold tracking-tight text-foreground">
+                    {step.title}
+                  </h3>
                   <p className="mt-4 text-sm leading-7 text-muted-foreground">{step.copy}</p>
                 </article>
               </FadeIn>
@@ -606,14 +631,20 @@ function Index() {
                   Decyzje oparte na danych, a nie na domysłach.
                 </h2>
                 <p className="text-base leading-7 text-muted-foreground sm:text-lg">
-                  Gdy status projektu, wydatki i marża są widoczne razem, szybciej wyłapujesz ryzyko i łatwiej budujesz zaufanie inwestorów. Estats ma wyglądać dokładnie tak: czysto, szybko i bez niedopowiedzeń.
+                  Gdy status projektu, wydatki i marża są widoczne razem, szybciej wyłapujesz ryzyko
+                  i łatwiej budujesz zaufanie inwestorów. Estats ma wyglądać dokładnie tak: czysto,
+                  szybko i bez niedopowiedzeń.
                 </p>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {showcaseStats.map((stat, index) => (
                     <FadeIn key={stat.label} delay={0.08 + index * 0.05}>
                       <div className="rounded-2xl border border-border bg-background/70 px-4 py-4">
-                        <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{stat.label}</div>
-                        <div className="mt-2 text-2xl font-semibold tracking-tight text-foreground">{stat.value}</div>
+                        <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                          {stat.label}
+                        </div>
+                        <div className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
+                          {stat.value}
+                        </div>
                       </div>
                     </FadeIn>
                   ))}
@@ -626,8 +657,12 @@ function Index() {
                 <div className="estats-panel estats-float rounded-[1.8rem] p-5">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Portfolio board</div>
-                      <div className="mt-1 text-lg font-semibold text-foreground">Widok operacyjny flippera</div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                        Portfolio board
+                      </div>
+                      <div className="mt-1 text-lg font-semibold text-foreground">
+                        Widok operacyjny flippera
+                      </div>
                     </div>
                     <TrendingUp className="h-4 w-4 text-brand" />
                   </div>
@@ -641,16 +676,24 @@ function Index() {
                         key={item.label}
                         className={`rounded-2xl border px-4 py-4 ${item.brand ? "border-brand/25 bg-brand-soft" : "border-border bg-background/60"}`}
                       >
-                        <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{item.label}</div>
-                        <div className="mt-2 text-xl font-semibold text-foreground">{item.value}</div>
+                        <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                          {item.label}
+                        </div>
+                        <div className="mt-2 text-xl font-semibold text-foreground">
+                          {item.value}
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div className="grid gap-4">
                   <div className="estats-panel estats-float-delay rounded-[1.8rem] p-5">
-                    <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Investor view</div>
-                    <div className="mt-2 text-lg font-semibold text-foreground">Przejrzysty raport</div>
+                    <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                      Investor view
+                    </div>
+                    <div className="mt-2 text-lg font-semibold text-foreground">
+                      Przejrzysty raport
+                    </div>
                     <div className="mt-5 space-y-3">
                       <div className="rounded-2xl border border-border bg-background/60 px-4 py-3">
                         <div className="text-xs text-muted-foreground">Kapitał</div>
@@ -663,7 +706,9 @@ function Index() {
                     </div>
                   </div>
                   <div className="estats-panel rounded-[1.8rem] p-5">
-                    <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Coordinator updates</div>
+                    <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                      Coordinator updates
+                    </div>
                     <div className="mt-2 text-lg font-semibold text-foreground">Feed z placu</div>
                     <div className="mt-5 space-y-3 text-sm text-muted-foreground">
                       <div className="rounded-2xl border border-border bg-background/60 px-4 py-3">
@@ -692,7 +737,9 @@ function Index() {
               Chcesz zobaczyć Estats wcześniej?
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-              Zostaw kontakt do waitlisty i sprawdź, jak może wyglądać nowy standard zarządzania flipami nieruchomości. Sekcja ma charakter prezentacyjny — formularz jest częścią landing page demo.
+              Zostaw kontakt do waitlisty i sprawdź, jak może wyglądać nowy standard zarządzania
+              flipami nieruchomości. Sekcja ma charakter prezentacyjny — formularz jest częścią
+              landing page demo.
             </p>
           </FadeIn>
 
@@ -702,7 +749,7 @@ function Index() {
                 <span className="sr-only">Adres e-mail</span>
                 <input
                   type="email"
-                  placeholder="Twój e-mail służbowy"
+                  placeholder="Twój e-mail"
                   className="h-14 w-full rounded-[1.2rem] border border-input bg-background px-5 text-base text-foreground outline-none transition focus:border-ring"
                 />
               </label>
@@ -721,7 +768,7 @@ function Index() {
       <footer className="relative z-10 border-t border-border px-5 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <EstatsLogo />
-          <div>Estats — nowoczesna platforma do zarządzania flipami nieruchomości.</div>
+          <div>Estats - nowoczesna platforma do zarządzania flipami nieruchomości.</div>
         </div>
       </footer>
     </main>
