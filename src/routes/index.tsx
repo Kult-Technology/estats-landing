@@ -237,9 +237,9 @@ function EstatsLogo() {
   return (
     <a href="/" className="flex items-center gap-3" aria-label="Estats — strona główna">
       <img
-        src={estatsLogo.url}
+        src="/favicon-512x512.png"
         alt="Logo Estats"
-        className="h-8 w-auto object-contain sm:h-9"
+        className="h-8 w-8 sm:h-9 sm:w-9"
       />
       <span className="font-display text-xl font-semibold tracking-tight text-foreground">Estats</span>
     </a>
