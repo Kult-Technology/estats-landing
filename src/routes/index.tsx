@@ -156,14 +156,14 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
-      { property: "og:image", content: "/__l5e/assets-v1/05b09d56-d0ec-4896-8666-414f2d45a668/estats-logo.png" },
+      { property: "og:image", content: "/favicon-512x512.png" },
       { name: "twitter:title", content: "Estats — kontrola nad flipem od zakupu do sprzedaży" },
       {
         name: "twitter:description",
         content:
           "Platforma SaaS do zarządzania flipami nieruchomości z pełną transparentnością dla inwestorów.",
       },
-      { name: "twitter:image", content: "/__l5e/assets-v1/05b09d56-d0ec-4896-8666-414f2d45a668/estats-logo.png" },
+      { name: "twitter:image", content: "/favicon-512x512.png" },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [
