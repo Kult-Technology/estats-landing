@@ -1,20 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
+import { useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
   BarChart3,
   Building2,
   Camera,
+  CheckCircle2,
   ChevronRight,
   Clock3,
   HandCoins,
   Layers3,
+  Loader2,
   ShieldCheck,
   Sparkles,
   TrendingUp,
+  Users,
   Wallet,
 } from "lucide-react";
+
+import { getWaitlistCount, joinWaitlist } from "../lib/api/waitlist.functions";
 
 type FadeInProps = {
   children: React.ReactNode;
@@ -178,6 +184,13 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
+  loader: async () => ({ waitlistCount: (await getWaitlistCount()).count }),
+  // The count is a one-shot SSR read that the form updates optimistically, so
+  // the loader never needs to re-run on the client. Pinning it this way keeps
+  // the router from revalidating and re-rendering the page (which would restart
+  // the entrance animations and look like a reload).
+  staleTime: Infinity,
+  shouldReload: false,
   component: Index,
 });
 
@@ -369,7 +382,7 @@ function DashboardMockup() {
           </div>
 
           <div className="grid gap-3">
-            <MockMetric label="Budżet vs actual" value="92%" tone="brand" />
+            <MockMetric label="Predykcje vs budżet" value="92%" tone="brand" />
             <MockMetric label="Prognoza marży" value="312 tys. zł" />
             <div className="rounded-[1.5rem] border border-border/70 bg-card/65 p-4">
               <div className="flex items-center justify-between text-xs uppercase tracking-[0.16em] text-muted-foreground">
@@ -396,8 +409,121 @@ function DashboardMockup() {
   );
 }
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Polish plural agreement for "osoba": 1 → osoba, 2-4 → osoby, otherwise osób,
+// with the standard 12-14 exception.
+function osobyLabel(n: number): string {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (n === 1) return "osoba";
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "osoby";
+  return "osób";
+}
+
+function WaitlistForm({ initialCount }: { initialCount: number }) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "already" | "invalid" | "error"
+  >("idle");
+  const [count, setCount] = useState(initialCount);
+
+  const formattedCount = new Intl.NumberFormat("pl-PL").format(count);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (status === "loading") return;
+
+    const value = email.trim();
+    if (!EMAIL_PATTERN.test(value)) {
+      setStatus("invalid");
+      return;
+    }
+
+    try {
+      setStatus("loading");
+      const result = await joinWaitlist({ data: { email: value } });
+      setEmail("");
+      setStatus(result?.alreadyJoined ? "already" : "success");
+      if (typeof result?.count === "number") setCount(result.count);
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  return (
+    <form
+      onSubmit={onSubmit}
+      className="estats-panel mx-auto grid max-w-3xl gap-4 rounded-[2rem] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:p-5"
+      noValidate
+    >
+      <p className="flex items-center justify-center gap-2 text-sm text-muted-foreground sm:col-span-2">
+        <Users className="h-4 w-4 text-brand" />
+        <span>
+          Już <span className="font-semibold text-foreground">{formattedCount}</span>{" "}
+          {osobyLabel(count)} na waitliście
+        </span>
+      </p>
+      <label className="min-w-0">
+        <span className="sr-only">Adres e-mail</span>
+        <input
+          type="email"
+          name="email"
+          required
+          autoComplete="email"
+          inputMode="email"
+          value={email}
+          onChange={(event) => {
+            setEmail(event.target.value);
+            if (status !== "loading") setStatus("idle");
+          }}
+          aria-invalid={status === "invalid"}
+          disabled={status === "loading"}
+          placeholder="Twój e-mail"
+          className="h-14 w-full rounded-[1.2rem] border border-input bg-background px-5 text-base text-foreground outline-none transition focus:border-ring disabled:opacity-60 aria-[invalid=true]:border-destructive"
+        />
+      </label>
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className="inline-flex h-14 items-center justify-center gap-2 rounded-[1.2rem] bg-primary px-6 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
+      >
+        {status === "loading" ? "Wysyłanie..." : "Dołącz do waitlisty"}
+        {status === "loading" ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <ArrowRight className="h-4 w-4" />
+        )}
+      </button>
+      <div className="min-h-5 sm:col-span-2" aria-live="polite">
+        {status === "success" && (
+          <p className="inline-flex items-center gap-2 text-sm text-foreground">
+            <CheckCircle2 className="h-4 w-4 text-brand" />
+            Dziękujemy! Twój adres trafił na waitlistę - odezwiemy się wkrótce.
+          </p>
+        )}
+        {status === "already" && (
+          <p className="inline-flex items-center gap-2 text-sm text-foreground">
+            <CheckCircle2 className="h-4 w-4 text-brand" />
+            Ten adres jest już na waitliście - czekaj na wiadomość od nas.
+          </p>
+        )}
+        {status === "invalid" && (
+          <p className="text-sm text-destructive">Podaj poprawny adres e-mail.</p>
+        )}
+        {status === "error" && (
+          <p className="text-sm text-destructive">
+            Nie udało się zapisać. Spróbuj ponownie za chwilę.
+          </p>
+        )}
+      </div>
+    </form>
+  );
+}
+
 function Index() {
   const reduceMotion = useReducedMotion();
+  const { waitlistCount } = Route.useLoaderData();
 
   return (
     <main className="estats-noise relative overflow-hidden bg-background text-foreground">
@@ -437,7 +563,7 @@ function Index() {
             <FadeIn className="space-y-8">
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                 <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-                Real-time tech platform dla flipów nieruchomości
+                Platforma dla flipów nieruchomości
               </div>
 
               <div className="space-y-6">
@@ -465,6 +591,19 @@ function Index() {
                   Zobacz przepływ projektu
                   <ChevronRight className="h-4 w-4" />
                 </a>
+              </div>
+
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <span className="grid h-7 w-7 place-items-center rounded-full border border-brand/25 bg-brand-soft text-brand">
+                  <Users className="h-3.5 w-3.5" />
+                </span>
+                <span>
+                  Już{" "}
+                  <span className="font-semibold text-foreground">
+                    {new Intl.NumberFormat("pl-PL").format(waitlistCount)}
+                  </span>{" "}
+                  {osobyLabel(waitlistCount)} na waitliście
+                </span>
               </div>
 
               <div className="grid gap-3 pt-2">
@@ -512,7 +651,7 @@ function Index() {
         <div className="mx-auto max-w-7xl space-y-12">
           <FadeIn>
             <SectionHeading
-              eyebrow="Projekt tracking first"
+              eyebrow="Najpierw postęp projektu"
               title="Najpierw widzisz postęp. Potem wszystko inne zaczyna się zgadzać."
               copy="Pierwsze sekundy w Estats mają odpowiedzieć na jedno pytanie: co dzieje się z projektem teraz. Dlatego postęp projektu, status i zużycie budżetu są na pierwszym planie - zanim wejdziesz głębiej w finanse i dokumenty."
             />
@@ -548,7 +687,7 @@ function Index() {
         <div className="mx-auto max-w-7xl space-y-12">
           <FadeIn>
             <SectionHeading
-              eyebrow="Role-based UX"
+              eyebrow="Widoki dla każdej roli"
               title="Każda rola widzi tylko to, czego naprawdę potrzebuje."
               copy="Estats nie próbuje zmusić wszystkich do jednego dashboardu. Widok flippera jest gęsty i decyzyjny, inwestora - klarowny i zaufaniowy, a koordynatora - szybki i mobilny."
             />
@@ -595,7 +734,7 @@ function Index() {
         <div className="mx-auto max-w-7xl space-y-12">
           <FadeIn>
             <SectionHeading
-              eyebrow="Workflow"
+              eyebrow="Przepływ projektu"
               title="Od zakupu do sprzedaży - jeden rytm pracy zamiast dziesięciu narzędzi."
               copy="Projekt nie rozjeżdża się między Excelem, komunikatorem i zdjęciami z budowy. W Estats każda decyzja i każdy update trafia do wspólnego przebiegu projektu."
             />
@@ -625,7 +764,7 @@ function Index() {
               <div className="max-w-xl space-y-5">
                 <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                   <BarChart3 className="h-3.5 w-3.5 text-brand" />
-                  Financial clarity
+                  Czytelność finansów
                 </div>
                 <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                   Decyzje oparte na danych, a nie na domysłach.
@@ -731,36 +870,19 @@ function Index() {
           <FadeIn className="text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/75 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-brand" />
-              Early access
+              Wczesny dostęp
             </div>
             <h2 className="font-display mt-6 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               Chcesz zobaczyć Estats wcześniej?
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
               Zostaw kontakt do waitlisty i sprawdź, jak może wyglądać nowy standard zarządzania
-              flipami nieruchomości. Sekcja ma charakter prezentacyjny — formularz jest częścią
-              landing page demo.
+              flipami nieruchomości.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.1} className="mt-10">
-            <div className="estats-panel mx-auto grid max-w-3xl gap-4 rounded-[2rem] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:p-5">
-              <label className="min-w-0">
-                <span className="sr-only">Adres e-mail</span>
-                <input
-                  type="email"
-                  placeholder="Twój e-mail"
-                  className="h-14 w-full rounded-[1.2rem] border border-input bg-background px-5 text-base text-foreground outline-none transition focus:border-ring"
-                />
-              </label>
-              <button
-                type="button"
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-[1.2rem] bg-primary px-6 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
-              >
-                Dołącz do waitlisty
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
+            <WaitlistForm initialCount={waitlistCount} />
           </FadeIn>
         </div>
       </section>
@@ -768,7 +890,20 @@ function Index() {
       <footer className="relative z-10 border-t border-border px-5 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <EstatsLogo />
-          <div>Estats - nowoczesna platforma do zarządzania flipami nieruchomości.</div>
+          <div className="flex flex-col gap-1 sm:items-end">
+            <span>Estats - nowoczesna platforma do zarządzania flipami nieruchomości.</span>
+            <span>
+              Stworzone przez{" "}
+              <a
+                href="https://kulttechnology.pl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-foreground underline-offset-4 transition-colors hover:text-brand hover:underline"
+              >
+                Kult Technology
+              </a>
+            </span>
+          </div>
         </div>
       </footer>
     </main>
