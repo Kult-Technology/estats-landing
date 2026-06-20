@@ -392,7 +392,7 @@ function DashboardMockup() {
 
           <div className="grid gap-3">
             <MockMetric label="Predykcje vs budżet" value="92%" tone="brand" />
-            <MockMetric label="Prognoza marży" value="312 tys. zł" />
+            <MockMetric label="Prognoza marży" value="103 tys. zł" />
             <div className="rounded-[1.5rem] border border-border/70 bg-card/65 p-4">
               <div className="flex items-center justify-between text-xs uppercase tracking-[0.16em] text-muted-foreground">
                 <span>Wydatki</span>
@@ -495,7 +495,7 @@ function WaitlistForm({ initialCount }: { initialCount: number }) {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="inline-flex h-14 items-center justify-center gap-2 rounded-[1.2rem] bg-primary px-6 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
+        className="inline-flex h-14 items-center justify-center gap-2 rounded-[1.2rem] cursor-pointer bg-primary px-6 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
       >
         {status === "loading" ? "Wysyłanie..." : "Dołącz do waitlisty"}
         {status === "loading" ? (
@@ -652,6 +652,94 @@ function Index() {
                 <div className="h-6 w-px bg-border" />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="dlaczego" className="relative z-10 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden lg:inset-y-12">
+          <motion.img
+            src="/zalozyciele.webp"
+            alt="Kamil i Dominik - współzałożyciele Estats"
+            className="h-full w-full select-none object-cover object-[center_28%] 2xl:object-top"
+            initial={{ scale: reduceMotion ? 0.9 : 0.88 }}
+            animate={reduceMotion ? { scale: 0.9 } : { scale: [0.88, 0.92, 0.88] }}
+            transition={
+              reduceMotion ? { duration: 0 } : { duration: 26, repeat: Infinity, ease: "easeInOut" }
+            }
+          />
+        </div>
+        <div className="absolute inset-0 bg-background/60 lg:bg-background/30" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--background),var(--background)_24%,transparent_48%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(270deg,var(--background),var(--background)_24%,transparent_48%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,var(--background),var(--background)_9%,transparent_24%,transparent_80%,var(--background)_91%,var(--background))]" />
+
+        <div className="relative mx-auto max-w-[1640px] px-5 py-20 sm:px-6 lg:px-10">
+          <div className="grid w-full gap-10 lg:min-h-[36rem] lg:grid-cols-[1fr_0.5fr_1fr] lg:items-stretch lg:gap-8">
+            <div className="flex flex-col justify-center gap-7 lg:min-h-[26rem]">
+              <FadeIn y={36}>
+                <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-card/70 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+                  Dlaczego powstał Estats?
+                </div>
+                <h2 className="font-display mt-4 text-3xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                  Estats nie powstał w sali konferencyjnej.{" "}
+                  <span className="text-brand">
+                    Powstał podczas zarządzania prawdziwymi flipami.
+                  </span>
+                </h2>
+              </FadeIn>
+              <FadeIn delay={0.25} className="pt-2">
+                <div className="font-signature text-4xl leading-none text-foreground">Kamil</div>
+                <div className="mt-3 text-sm leading-6 text-muted-foreground">
+                  <div className="font-medium text-foreground">Współzałożyciel · architekt</div>
+                  <div>Twórca platformy i systemu</div>
+                  <div>Setki wdrożeń produkcyjnych</div>
+                </div>
+              </FadeIn>
+            </div>
+
+            <div aria-hidden className="hidden lg:block" />
+
+            <div className="flex flex-col justify-center gap-6 lg:min-h-[26rem] lg:text-right">
+              <FadeIn delay={0.1} y={36}>
+                <div className="font-display text-6xl leading-none text-brand">“</div>
+                <blockquote className="mt-3 text-2xl font-medium leading-9 text-foreground sm:text-3xl sm:leading-10">
+                  Przez lata szukałem systemu, który nadąży za skalą mojego biznesu.{" "}
+                  <span className="text-brand">Nie znalazłem go.</span> Dlatego powstał Estats.
+                </blockquote>
+              </FadeIn>
+              <div className="flex flex-col gap-3 lg:items-end">
+                {[
+                  { icon: Building2, label: "Setki decyzji", sub: "każdego dnia" },
+                  { icon: BarChart3, label: "Dziesiątki inwestycji", sub: "w jednym czasie" },
+                  { icon: Clock3, label: "Niekończący się chaos", sub: "do uporządkowania" },
+                ].map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <FadeIn key={item.label} delay={0.2 + index * 0.08}>
+                      <div className="flex items-center gap-2.5 lg:flex-row-reverse">
+                        <Icon className="h-6 w-6 shrink-0 text-brand" />
+                        <div>
+                          <div className="text-base font-semibold leading-tight text-foreground">
+                            {item.label}
+                          </div>
+                          <div className="text-sm text-muted-foreground">{item.sub}</div>
+                        </div>
+                      </div>
+                    </FadeIn>
+                  );
+                })}
+              </div>
+              <FadeIn delay={0.3} className="pt-2">
+                <div className="font-signature text-4xl leading-none text-foreground">Dominik</div>
+                <div className="mt-3 text-sm leading-6 text-muted-foreground">
+                  <div className="font-medium text-foreground">Współzałożyciel · ambasador</div>
+                  <div>Flipper Roku 2025</div>
+                  <div>200+ flipów od 2023</div>
+                </div>
+              </FadeIn>
+            </div>
           </div>
         </div>
       </section>
@@ -879,14 +967,17 @@ function Index() {
           <FadeIn className="text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/75 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-brand" />
-              Wczesny dostęp
+              Program wczesnych testów
             </div>
             <h2 className="font-display mt-6 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               Chcesz zobaczyć Estats wcześniej?
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-              Zostaw kontakt do waitlisty i sprawdź, jak może wyglądać nowy standard zarządzania
-              flipami nieruchomości.
+              Dołącz do grona pierwszych testerów. Twój feedback pomoże nam stworzyć lepszy produkt,
+              a Ty zyskasz wcześniejszy dostęp i specjalne warunki na start.
+            </p>
+            <p className="mx-auto mt-3 text-sm text-muted-foreground/80">
+              Liczba miejsc w testach jest ograniczona.
             </p>
           </FadeIn>
 

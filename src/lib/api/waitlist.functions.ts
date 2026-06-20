@@ -16,7 +16,7 @@ const WAITLIST_SENDER = "kontakt@kultinvest.pl";
 
 // Social-proof baseline added to the real sign-up count before it is shown.
 // Change this single number to adjust the displayed starting point.
-export const WAITLIST_BASE_COUNT = 52;
+export const WAITLIST_BASE_COUNT = 23;
 
 // Reads the unique sign-up count from Redis and applies the base offset.
 // Returns the base count alone if Redis is unconfigured or unreachable, so the

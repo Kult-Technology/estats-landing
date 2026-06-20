@@ -172,6 +172,10 @@
   font-family: var(--font-display);
 }
 
+.font-signature {
+  font-family: "Caveat", var(--font-display), cursive;
+}
+
 .estats-grid {
   background-image:
     linear-gradient(
