@@ -7,6 +7,7 @@ import {
   BarChart3,
   Building2,
   Camera,
+  Check,
   CheckCircle2,
   ChevronDown,
   ChevronRight,
@@ -14,8 +15,12 @@ import {
   HandCoins,
   Layers3,
   Loader2,
+  MessageSquare,
+  Minus,
+  Rocket,
   ShieldCheck,
   Sparkles,
+  Tag,
   TrendingUp,
   Users,
   Wallet,
@@ -142,6 +147,43 @@ const showcaseStats = [
   { label: "Aktualizacje w tym tygodniu", value: "48" },
 ];
 
+const comparisonRows = [
+  {
+    dzis: "Budżet rozjechany po kilku arkuszach",
+    estats: "Jeden budżet projektu, zawsze aktualny",
+  },
+  { dzis: "Inwestor dzwoni i pyta o status", estats: "Inwestor sam widzi postęp i ROI" },
+  { dzis: "Zdjęcia i ustalenia giną w czacie", estats: "Feed z placu podpięty pod projekt" },
+  { dzis: "Marża liczona dopiero po sprzedaży", estats: "Odchylenie od budżetu widać na bieżąco" },
+  {
+    dzis: "Każdy kolejny flip ogarniany od zera",
+    estats: "Powtarzalny proces dla kolejnych flipów",
+  },
+];
+
+const testerBenefits = [
+  {
+    icon: Rocket,
+    title: "Wcześniejszy dostęp",
+    copy: "Wchodzisz do Estats przed publicznym startem, zanim ruszą zapisy dla wszystkich.",
+  },
+  {
+    icon: Tag,
+    title: "Preferencyjne warunki na start",
+    copy: "Wcześni testerzy dostają lepsze warunki, gdy uruchomimy pełną wersję produktu.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Realny wpływ na produkt",
+    copy: "Twój feedback trafia bezpośrednio do twórców i realnie wpływa na rozwój Estats.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Zero zobowiązań",
+    copy: "Zapis jest darmowy, bez płatności. Odezwiemy się przy starcie, a możesz wypisać się jednym mailem.",
+  },
+];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -193,7 +235,6 @@ export const Route = createFileRoute("/")({
             "Platforma do zarządzania flipami nieruchomości: tracking projektu, finanse, ROI i aktualizacje z remontów.",
           inLanguage: "pl-PL",
           image: OG_IMAGE,
-          offers: { "@type": "Offer", price: "0", priceCurrency: "PLN" },
           publisher: {
             "@type": "Organization",
             name: "Kult Technology",
@@ -636,6 +677,9 @@ function Index() {
 
           <FadeIn delay={0.15} y={38}>
             <DashboardMockup />
+            <p className="mt-3 text-center text-xs text-muted-foreground/70">
+              Dane w podglądzie są przykładowe i ilustrują interfejs Estats.
+            </p>
           </FadeIn>
         </div>
       </section>
@@ -962,6 +1006,52 @@ function Index() {
         </div>
       </section>
 
+      <section className="relative z-10 px-5 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl space-y-12">
+          <FadeIn>
+            <SectionHeading
+              eyebrow="Excel kontra Estats"
+              title="Arkusz i czat dają radę na jeden flip. Przy kilku naraz zaczynają gubić pieniądze."
+              copy="Nie walczymy z Excelem - sami tak zaczynaliśmy. Ale gdy projektów jest więcej, rozproszone dane, telefony od inwestora i ustalenia w komunikatorach kosztują czas i marżę. Estats zbiera to w jednym miejscu."
+            />
+          </FadeIn>
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            <FadeIn>
+              <div className="estats-panel h-full rounded-[1.9rem] p-6 sm:p-8">
+                <div className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                  Dziś: Excel, WhatsApp i pamięć
+                </div>
+                <ul className="mt-6 space-y-4 text-sm leading-6 text-muted-foreground">
+                  {comparisonRows.map((row) => (
+                    <li key={row.dzis} className="flex gap-3">
+                      <Minus className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/60" />
+                      <span>{row.dzis}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <div className="estats-panel-strong h-full rounded-[1.9rem] p-6 sm:p-8">
+                <div className="text-xs font-medium uppercase tracking-[0.18em] text-brand">
+                  Z Estats
+                </div>
+                <ul className="mt-6 space-y-4 text-sm leading-6 text-foreground">
+                  {comparisonRows.map((row) => (
+                    <li key={row.estats} className="flex gap-3">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                      <span>{row.estats}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
       <section id="waitlista" className="relative z-10 px-5 py-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl rounded-[2.5rem] border border-brand/20 bg-card/55 p-6 sm:p-8 lg:p-12">
           <FadeIn className="text-center">
@@ -973,15 +1063,30 @@ function Index() {
               Chcesz zobaczyć Estats wcześniej?
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-              Dołącz do grona pierwszych testerów. Twój feedback pomoże nam stworzyć lepszy produkt,
-              a Ty zyskasz wcześniejszy dostęp i specjalne warunki na start.
-            </p>
-            <p className="mx-auto mt-3 text-sm text-muted-foreground/80">
-              Liczba miejsc w testach jest ograniczona.
+              Dołącz do grona pierwszych testerów Estats. Oto, co dostajesz w zamian.
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.1} className="mt-10">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {testerBenefits.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <FadeIn key={item.title} delay={index * 0.06}>
+                  <div className="estats-panel flex h-full gap-4 rounded-2xl p-5 text-left">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-brand/25 bg-brand-soft text-brand">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <div className="text-sm font-semibold text-foreground">{item.title}</div>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.copy}</p>
+                    </div>
+                  </div>
+                </FadeIn>
+              );
+            })}
+          </div>
+
+          <FadeIn delay={0.1} className="mt-8">
             <WaitlistForm initialCount={waitlistCount} />
           </FadeIn>
 
