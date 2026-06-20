@@ -5,6 +5,7 @@ import {
   ArrowRight,
   BadgeCheck,
   BarChart3,
+  Bot,
   Building2,
   Camera,
   Check,
@@ -12,8 +13,13 @@ import {
   ChevronDown,
   ChevronRight,
   Clock3,
+  FileText,
+  FlaskConical,
+  Hammer,
   HandCoins,
+  Handshake,
   Layers3,
+  Lightbulb,
   Loader2,
   MessageSquare,
   Minus,
@@ -24,6 +30,7 @@ import {
   TrendingUp,
   Users,
   Wallet,
+  Wrench,
 } from "lucide-react";
 
 import { getWaitlistCount, joinWaitlist } from "../lib/api/waitlist.functions";
@@ -51,12 +58,12 @@ type MockMetricProps = {
 const heroHighlights = [
   "Status projektu w czasie rzeczywistym",
   "Koszty i budżet bez chaosu w Excelu",
-  "Jeden widok dla flippera, inwestora i koordynatora",
+  "Przejrzysta współpraca między flipperem a inwestorem",
 ];
 
 const trustItems = [
   { value: "1 system", label: "zakup, remont, sprzedaż i raportowanie" },
-  { value: "3 role", label: "osobne widoki dla każdego uczestnika projektu" },
+  { value: "4 role", label: "osobne widoki dla każdego uczestnika projektu" },
   { value: "Live", label: "aktualizacje postępu, kosztów i ryzyk" },
   { value: "ROI", label: "pełna czytelność finansów dla inwestora" },
 ];
@@ -113,6 +120,16 @@ const roles = [
       "duże akcje i proste aktualizacje z remontów",
       "timeline, zadania i terminy w jednym miejscu",
       "zdjęcia i statusy dodawane bez opóźnień",
+    ],
+  },
+  {
+    title: "Sprzedawca",
+    subtitle: "Widok sprzedażowy i ofertowy",
+    icon: Handshake,
+    bullets: [
+      "harmonogram prezentacji i oględzin z klientami",
+      "zapytania i oferty kupujących w jednym miejscu",
+      "dokumenty sprzedaży i finalizacja transakcji",
     ],
   },
 ];
@@ -181,6 +198,72 @@ const testerBenefits = [
     icon: ShieldCheck,
     title: "Zero zobowiązań",
     copy: "Zapis jest darmowy, bez płatności. Odezwiemy się przy starcie, a możesz wypisać się jednym mailem.",
+  },
+];
+
+const storySteps = [
+  {
+    icon: Layers3,
+    title: "Lata w chaosie",
+    copy: "Dominik od lat prowadzi flipy na dużą skalę. Im więcej projektów, tym więcej arkuszy, wiadomości na WhatsAppie i plików na dysku - dane rozjeżdżały się szybciej, niż dało się je ogarnąć.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Spojrzenie od środka",
+    copy: "Kamil poznał jego firmy i procesy od podszewki. Widział, gdzie znika czas, gdzie ucieka marża i czego naprawdę brakuje, żeby skala przestała oznaczać chaos.",
+  },
+  {
+    icon: Wrench,
+    title: "Z wiedzy w system",
+    copy: "Z tej wiedzy Kamil ułożył operacje i zbudował narzędzie, które porządkuje cały proces flipa w jednym miejscu. Tak powstał Estats - nie z teorii, ale z praktyki.",
+  },
+];
+
+const roadmap = [
+  {
+    phase: "Teraz",
+    title: "MVP - rdzeń Estats",
+    icon: Hammer,
+    current: true,
+    items: [
+      "Zakładasz flipy i grupujesz je w inwestycje",
+      "Budżet, koszty i prognoza ROI każdego flipa pod kontrolą",
+      "Postęp remontu, zdjęcia i dokumenty w jednym miejscu",
+      "Inwestor sam widzi postęp i ROI - bez ręcznego raportowania",
+      "A gdy działasz z zespołem - osobne widoki dla 4 ról",
+    ],
+  },
+  {
+    phase: "Wkrótce",
+    title: "Zamknięte testy z waitlistą",
+    icon: FlaskConical,
+    current: false,
+    items: [
+      "Pierwsi testerzy korzystają z Estats na żywo",
+      "Zbieramy feedback i szlifujemy produkt",
+      "Kierunek rozwoju wyznacza realna praca z flipami",
+    ],
+  },
+  {
+    phase: "W planach",
+    title: "Więcej kontroli nad flipem",
+    icon: FileText,
+    current: false,
+    items: [
+      "Śledzenie zakupów i materiałów na każdym flipie",
+      "Generator umów: szkic, uzupełniasz dane, dokument gotowy do podpisu",
+      "Kolejne usprawnienia zgłaszane przez testerów",
+    ],
+  },
+  {
+    phase: "Później",
+    title: "Automatyzacja z AI",
+    icon: Bot,
+    current: false,
+    items: [
+      "Wrzucasz faktury, a AI rozdziela je na właściwe flipy",
+      "Mniej ręcznej pracy, więcej gotowych danych",
+    ],
   },
 ];
 
@@ -622,7 +705,7 @@ function Index() {
                 </h1>
                 <p className="max-w-xl text-lg leading-8 text-muted-foreground sm:text-xl">
                   Estats łączy tracking projektu, finanse, dokumenty i aktualizacje z remontów w
-                  jednym uporządkowanym widoku dla flippera, inwestora i koordynatora.
+                  jednym uporządkowanym widoku dla flippera, inwestora, koordynatora i sprzedawcy.
                 </p>
               </div>
 
@@ -701,7 +784,7 @@ function Index() {
       </section>
 
       <section id="dlaczego" className="relative z-10 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden lg:inset-y-12">
+        <div className="absolute inset-0 hidden overflow-hidden lg:block lg:inset-y-12">
           <motion.img
             src="/zalozyciele.webp"
             alt="Kamil i Dominik - współzałożyciele Estats"
@@ -713,12 +796,20 @@ function Index() {
             }
           />
         </div>
-        <div className="absolute inset-0 bg-background/60 lg:bg-background/30" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--background),var(--background)_24%,transparent_48%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(270deg,var(--background),var(--background)_24%,transparent_48%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,var(--background),var(--background)_9%,transparent_24%,transparent_80%,var(--background)_91%,var(--background))]" />
+        <div className="absolute inset-x-0 top-0 h-96 overflow-hidden lg:hidden">
+          <img
+            src="/zalozyciele.webp"
+            alt="Kamil i Dominik - współzałożyciele Estats"
+            className="h-full w-full select-none object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,transparent_32%,var(--background)_72%)]" />
+        </div>
+        <div className="absolute inset-0 hidden bg-background/60 lg:block lg:bg-background/30" />
+        <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,var(--background),var(--background)_24%,transparent_48%)] lg:block" />
+        <div className="absolute inset-0 hidden bg-[linear-gradient(270deg,var(--background),var(--background)_24%,transparent_48%)] lg:block" />
+        <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,var(--background),var(--background)_9%,transparent_24%,transparent_80%,var(--background)_91%,var(--background))] lg:block" />
 
-        <div className="relative mx-auto max-w-[1640px] px-5 py-20 sm:px-6 lg:px-10">
+        <div className="relative mx-auto max-w-[1640px] px-5 pb-20 pt-64 sm:px-6 lg:px-10 lg:py-20">
           <div className="grid w-full gap-10 lg:min-h-[36rem] lg:grid-cols-[1fr_0.5fr_1fr] lg:items-stretch lg:gap-8">
             <div className="flex flex-col justify-center gap-7 lg:min-h-[26rem]">
               <FadeIn y={36}>
@@ -733,12 +824,12 @@ function Index() {
                   </span>
                 </h2>
               </FadeIn>
-              <FadeIn delay={0.25} className="pt-2">
+              <FadeIn delay={0.25} className="pt-2 lg:text-right">
                 <div className="font-signature text-4xl leading-none text-foreground">Kamil</div>
                 <div className="mt-3 text-sm leading-6 text-muted-foreground">
-                  <div className="font-medium text-foreground">Współzałożyciel · architekt</div>
+                  <div className="font-medium text-foreground">Założyciel Estats</div>
                   <div>Twórca platformy i systemu</div>
-                  <div>Setki wdrożeń produkcyjnych</div>
+                  <div>Dziesiątki wdrożeń produkcyjnych</div>
                 </div>
               </FadeIn>
             </div>
@@ -775,15 +866,101 @@ function Index() {
                   );
                 })}
               </div>
-              <FadeIn delay={0.3} className="pt-2">
+              <FadeIn delay={0.3} className="pt-2 lg:text-left">
                 <div className="font-signature text-4xl leading-none text-foreground">Dominik</div>
                 <div className="mt-3 text-sm leading-6 text-muted-foreground">
-                  <div className="font-medium text-foreground">Współzałożyciel · ambasador</div>
-                  <div>Flipper Roku 2025</div>
-                  <div>200+ flipów od 2023</div>
+                  <div className="font-medium text-foreground">Ambasador Estats</div>
+                  <div>Wieloletni flipper</div>
+                  <div>Praktyk rynku nieruchomości</div>
                 </div>
               </FadeIn>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="historia" className="relative z-10 px-5 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl space-y-12">
+          <FadeIn>
+            <SectionHeading
+              eyebrow="Historia Estats"
+              title="Z chaosu jednego flippera - w narzędzie dla każdego."
+              copy="Estats nie zaczął się od pomysłu na aplikację. Zaczął się od konkretnego problemu, który trzeba było rozwiązać."
+            />
+          </FadeIn>
+
+          <div className="relative grid gap-4 md:grid-cols-3">
+            <div
+              aria-hidden
+              className="estats-gradient-line absolute left-0 right-0 top-[2.4rem] hidden h-px md:block"
+            />
+            {storySteps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <FadeIn key={step.title} delay={index * 0.12}>
+                  <article className="estats-panel relative h-full rounded-[1.75rem] p-6">
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-brand/25 bg-brand-soft text-brand">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                        0{index + 1}
+                      </span>
+                    </div>
+                    <h3 className="mt-5 text-xl font-semibold tracking-tight text-foreground">
+                      {step.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground">{step.copy}</p>
+                  </article>
+                </FadeIn>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative z-10 px-5 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl space-y-12">
+          <FadeIn>
+            <SectionHeading
+              eyebrow="Excel kontra Estats"
+              title="Arkusz i czat dają radę na jeden flip. Przy kilku naraz zaczynają gubić pieniądze."
+              copy="Nie walczymy z Excelem - sami tak zaczynaliśmy. Excel, WhatsApp i Dysk Google sprawdzają się na jednym flipie, ale przy kilku naraz dane się rozjeżdżają, a czas i marża uciekają. Estats zastępuje je wszystkie jednym miejscem."
+            />
+          </FadeIn>
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            <FadeIn>
+              <div className="estats-panel h-full rounded-[1.9rem] p-6 sm:p-8">
+                <div className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                  Dziś: Excel, WhatsApp i Dysk Google
+                </div>
+                <ul className="mt-6 space-y-4 text-sm leading-6 text-muted-foreground">
+                  {comparisonRows.map((row) => (
+                    <li key={row.dzis} className="flex gap-3">
+                      <Minus className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/60" />
+                      <span>{row.dzis}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <div className="estats-panel-strong h-full rounded-[1.9rem] p-6 sm:p-8">
+                <div className="text-xs font-medium uppercase tracking-[0.18em] text-brand">
+                  Z Estats
+                </div>
+                <ul className="mt-6 space-y-4 text-sm leading-6 text-foreground">
+                  {comparisonRows.map((row) => (
+                    <li key={row.estats} className="flex gap-3">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                      <span>{row.estats}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -830,11 +1007,11 @@ function Index() {
             <SectionHeading
               eyebrow="Widoki dla każdej roli"
               title="Każda rola widzi tylko to, czego naprawdę potrzebuje."
-              copy="Estats nie próbuje zmusić wszystkich do jednego dashboardu. Widok flippera jest gęsty i decyzyjny, inwestora - klarowny i wzbudzający zaufanie, a koordynatora - szybki i mobilny."
+              copy="Estats nie próbuje zmusić wszystkich do jednego dashboardu. Widok flippera jest gęsty i decyzyjny, inwestora - klarowny i wzbudzający zaufanie, koordynatora - szybki i mobilny, a sprzedawcy - skupiony na ofertach i finalizacji."
             />
           </FadeIn>
 
-          <div className="grid gap-4 xl:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {roles.map((role, index) => {
               const Icon = role.icon;
               return (
@@ -1006,48 +1183,72 @@ function Index() {
         </div>
       </section>
 
-      <section className="relative z-10 px-5 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl space-y-12">
+      <section id="roadmap" className="relative z-10 px-5 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl space-y-12">
           <FadeIn>
             <SectionHeading
-              eyebrow="Excel kontra Estats"
-              title="Arkusz i czat dają radę na jeden flip. Przy kilku naraz zaczynają gubić pieniądze."
-              copy="Nie walczymy z Excelem - sami tak zaczynaliśmy. Ale gdy projektów jest więcej, rozproszone dane, telefony od inwestora i ustalenia w komunikatorach kosztują czas i marżę. Estats zbiera to w jednym miejscu."
+              eyebrow="Roadmapa"
+              title="Co już budujemy, a co pojawi się dalej."
+              copy="Estats jest jeszcze przed startem, więc gramy w otwarte karty. Bez sztywnych dat - tempo wyznacza feedback testerów i realne potrzeby flipperów."
             />
           </FadeIn>
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            <FadeIn>
-              <div className="estats-panel h-full rounded-[1.9rem] p-6 sm:p-8">
-                <div className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  Dziś: Excel, WhatsApp i pamięć
-                </div>
-                <ul className="mt-6 space-y-4 text-sm leading-6 text-muted-foreground">
-                  {comparisonRows.map((row) => (
-                    <li key={row.dzis} className="flex gap-3">
-                      <Minus className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/60" />
-                      <span>{row.dzis}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.1}>
-              <div className="estats-panel-strong h-full rounded-[1.9rem] p-6 sm:p-8">
-                <div className="text-xs font-medium uppercase tracking-[0.18em] text-brand">
-                  Z Estats
-                </div>
-                <ul className="mt-6 space-y-4 text-sm leading-6 text-foreground">
-                  {comparisonRows.map((row) => (
-                    <li key={row.estats} className="flex gap-3">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                      <span>{row.estats}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
+          <div className="relative">
+            <div
+              aria-hidden
+              className="absolute bottom-6 left-[1.4rem] top-6 w-px bg-[linear-gradient(180deg,color-mix(in_oklab,var(--brand)_45%,transparent),var(--border),transparent)]"
+            />
+            <div className="space-y-5">
+              {roadmap.map((phase, index) => {
+                const Icon = phase.icon;
+                return (
+                  <FadeIn key={phase.phase} delay={index * 0.1}>
+                    <div className="relative flex gap-5">
+                      <span
+                        className={`relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-2xl border ${
+                          phase.current
+                            ? "border-brand/40 bg-brand-soft text-brand"
+                            : "border-border bg-card/80 text-muted-foreground"
+                        }`}
+                      >
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <div
+                        className={`flex-1 rounded-[1.5rem] p-5 ${
+                          phase.current ? "estats-panel-strong" : "estats-panel"
+                        }`}
+                      >
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                          <span
+                            className={`text-xs font-semibold uppercase tracking-[0.2em] ${
+                              phase.current ? "text-brand" : "text-muted-foreground"
+                            }`}
+                          >
+                            {phase.phase}
+                          </span>
+                          {phase.current && (
+                            <span className="rounded-full border border-brand/30 bg-brand-soft px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-wide text-brand">
+                              W toku
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="mt-1 text-lg font-semibold tracking-tight text-foreground">
+                          {phase.title}
+                        </h3>
+                        <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
+                          {phase.items.map((item) => (
+                            <li key={item} className="flex gap-2.5">
+                              <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand/70" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </FadeIn>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
