@@ -21,7 +21,7 @@ const WAITLIST_WELCOME_SENDER = "Estats <estats@kulttechnology.pl>";
 
 // Social-proof baseline added to the real sign-up count before it is shown.
 // Change this single number to adjust the displayed starting point.
-export const WAITLIST_BASE_COUNT = 23;
+export const WAITLIST_BASE_COUNT = 8;
 
 // Reads the unique sign-up count from Redis and applies the base offset.
 // Returns the base count alone if Redis is unconfigured or unreachable, so the
