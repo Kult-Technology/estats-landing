@@ -12,5 +12,3 @@ export function EmailTemplate({ email }: EmailTemplateProps) {
     </div>
   );
 }
-
-export default EmailTemplate;

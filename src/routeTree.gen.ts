@@ -9,8 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WypiszRouteImport } from './routes/wypisz'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WypiszRoute = WypiszRouteImport.update({
+  id: '/wypisz',
+  path: '/wypisz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +25,39 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/wypisz': typeof WypiszRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/wypisz': typeof WypiszRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/wypisz': typeof WypiszRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/wypisz'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/wypisz'
+  id: '__root__' | '/' | '/wypisz'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WypiszRoute: typeof WypiszRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wypisz': {
+      id: '/wypisz'
+      path: '/wypisz'
+      fullPath: '/wypisz'
+      preLoaderRoute: typeof WypiszRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WypiszRoute: WypiszRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

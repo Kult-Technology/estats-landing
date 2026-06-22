@@ -889,7 +889,7 @@ function Index() {
                 <div className="font-signature text-4xl leading-none text-foreground">Dominik</div>
                 <div className="mt-3 text-sm leading-6 text-muted-foreground">
                   <div className="font-medium text-foreground">Ambasador Estats</div>
-                  <div>Flipper roku 2025 (Mieszkanicznik)</div>
+                  <div>Flipper roku 2025</div>
                   <div>Praktyk rynku nieruchomości</div>
                 </div>
               </FadeIn>
@@ -951,20 +951,20 @@ function Index() {
           <FadeIn delay={0.1}>
             <div className="overflow-hidden rounded-[1.75rem] border border-border bg-card/40">
               <div className="grid grid-cols-[minmax(0,1.5fr)_repeat(5,minmax(0,1fr))] items-stretch border-b border-border">
-                <div className="flex items-end py-4 pl-4 pr-2 text-[0.65rem] font-medium uppercase tracking-[0.12em] text-muted-foreground sm:pl-6">
+                <div className="flex items-center py-4 pl-4 pr-2 text-[0.65rem] font-medium uppercase tracking-[0.12em] text-muted-foreground sm:pl-6">
                   Co musisz ogarnąć
                 </div>
                 {compareTools.map((tool) => (
                   <div
                     key={tool.key}
-                    className="flex flex-col items-center justify-end px-1 py-4 text-center"
+                    className="flex flex-col items-center justify-center px-1 py-4 text-center"
                   >
                     <span className="text-[0.7rem] font-medium leading-tight text-muted-foreground sm:text-sm">
                       {tool.label}
                     </span>
                   </div>
                 ))}
-                <div className="flex flex-col items-center justify-end gap-1.5 border-l border-brand/15 bg-brand-soft/45 px-1 py-4 text-center">
+                <div className="flex flex-col items-center justify-center gap-1.5 border-l border-brand/15 bg-brand-soft/45 px-1 py-4 text-center">
                   <img
                     src="/estats-icon.png"
                     alt="Logo Estats"

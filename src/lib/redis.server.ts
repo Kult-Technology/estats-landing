@@ -27,3 +27,7 @@ export function getRedis(): Redis | null {
 // Redis key holding the set of unique waitlist sign-up emails.
 // SADD dedupes on insert; SCARD returns the unique count.
 export const WAITLIST_SET_KEY = "waitlist:emails";
+
+// Set of addresses that explicitly unsubscribed (via the one-click link). Kept
+// as an audit trail so we never re-contact them in future broadcasts.
+export const WAITLIST_UNSUBSCRIBED_KEY = "waitlist:unsubscribed";
