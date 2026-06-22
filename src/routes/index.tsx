@@ -164,18 +164,23 @@ const showcaseStats = [
   { label: "Aktualizacje w tym tygodniu", value: "48" },
 ];
 
-const comparisonRows = [
-  {
-    dzis: "Budżet rozjechany po kilku arkuszach",
-    estats: "Jeden budżet projektu, zawsze aktualny",
-  },
-  { dzis: "Inwestor dzwoni i pyta o status", estats: "Inwestor sam widzi postęp i ROI" },
-  { dzis: "Zdjęcia i ustalenia giną w czacie", estats: "Feed z placu podpięty pod projekt" },
-  { dzis: "Marża liczona dopiero po sprzedaży", estats: "Odchylenie od budżetu widać na bieżąco" },
-  {
-    dzis: "Każdy kolejny flip ogarniany od zera",
-    estats: "Powtarzalny proces dla kolejnych flipów",
-  },
+const compareTools = [
+  { key: "excel", label: "Excel" },
+  { key: "whatsapp", label: "WhatsApp" },
+  { key: "drive", label: "Dysk Google" },
+  { key: "trello", label: "Trello" },
+] as const;
+
+// 2 = pełne wsparcie, 1 = częściowe, 0 = brak. Estats = zawsze pełne.
+const compareMatrix = [
+  { feature: "Budżet, koszty i prognoza ROI", excel: 1, whatsapp: 0, drive: 0, trello: 0 },
+  { feature: "Postęp i etapy remontu", excel: 1, whatsapp: 0, drive: 0, trello: 1 },
+  { feature: "Zdjęcia i aktualizacje z placu", excel: 0, whatsapp: 1, drive: 1, trello: 1 },
+  { feature: "Zadania, terminy i przypomnienia", excel: 0, whatsapp: 0, drive: 0, trello: 2 },
+  { feature: "Dokumenty projektu w jednym miejscu", excel: 0, whatsapp: 0, drive: 2, trello: 0 },
+  { feature: "Widok dla inwestora (postęp + ROI)", excel: 0, whatsapp: 0, drive: 0, trello: 0 },
+  { feature: "Role i uprawnienia w projekcie", excel: 0, whatsapp: 0, drive: 1, trello: 1 },
+  { feature: "Wszystko połączone w jednym miejscu", excel: 0, whatsapp: 0, drive: 0, trello: 0 },
 ];
 
 const testerBenefits = [
@@ -257,12 +262,15 @@ const roadmap = [
   },
   {
     phase: "Później",
-    title: "Automatyzacja z AI",
+    title: "Pełna obsługa sprzedaży i automatyzacja",
     icon: Bot,
     current: false,
     items: [
-      "Wrzucasz faktury, a AI rozdziela je na właściwe flipy",
-      "Mniej ręcznej pracy, więcej gotowych danych",
+      "Kompleksowa obsługa procesu sprzedaży nieruchomości",
+      "Onboarding pracowników w firmie",
+      "Wewnętrzna baza dokumentów",
+      "AI rozdziela wrzucone faktury na właściwe flipy",
+      "Jeszcze większa automatyzacja codziennej pracy",
     ],
   },
 ];
@@ -376,6 +384,20 @@ function SectionHeading({ eyebrow, title, copy }: SectionHeadingProps) {
       <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">{copy}</p>
     </div>
   );
+}
+
+function CompareMark({ value, brand = false }: { value: number; brand?: boolean }) {
+  if (brand || value >= 2) {
+    return (
+      <Check
+        className={`mx-auto h-[1.1rem] w-[1.1rem] ${brand ? "text-brand" : "text-foreground/85"}`}
+      />
+    );
+  }
+  if (value === 1) {
+    return <Check className="mx-auto h-4 w-4 text-muted-foreground/40" />;
+  }
+  return <Minus className="mx-auto h-3 w-3 text-muted-foreground/30" />;
 }
 
 function MockMetric({ label, value, tone = "default" }: MockMetricProps) {
@@ -760,9 +782,6 @@ function Index() {
 
           <FadeIn delay={0.15} y={38}>
             <DashboardMockup />
-            <p className="mt-3 text-center text-xs text-muted-foreground/70">
-              Dane w podglądzie są przykładowe i ilustrują interfejs Estats.
-            </p>
           </FadeIn>
         </div>
       </section>
@@ -870,7 +889,7 @@ function Index() {
                 <div className="font-signature text-4xl leading-none text-foreground">Dominik</div>
                 <div className="mt-3 text-sm leading-6 text-muted-foreground">
                   <div className="font-medium text-foreground">Ambasador Estats</div>
-                  <div>Wieloletni flipper</div>
+                  <div>Flipper roku 2025 (Mieszkanicznik)</div>
                   <div>Praktyk rynku nieruchomości</div>
                 </div>
               </FadeIn>
@@ -920,48 +939,90 @@ function Index() {
       </section>
 
       <section className="relative z-10 px-5 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl space-y-12">
+        <div className="mx-auto max-w-5xl space-y-10">
           <FadeIn>
             <SectionHeading
-              eyebrow="Excel kontra Estats"
-              title="Arkusz i czat dają radę na jeden flip. Przy kilku naraz zaczynają gubić pieniądze."
-              copy="Nie walczymy z Excelem - sami tak zaczynaliśmy. Excel, WhatsApp i Dysk Google sprawdzają się na jednym flipie, ale przy kilku naraz dane się rozjeżdżają, a czas i marża uciekają. Estats zastępuje je wszystkie jednym miejscem."
+              eyebrow="Porównanie narzędzi"
+              title="Zamiast kilku narzędzi - jeden system zbudowany pod flipy."
+              copy="Dziś budżet liczysz w Excelu, zdjęcia lecą na WhatsApp, pliki lądują na Dysku Google, a zadania w Trello - i ręcznie spinasz to w całość. Estats łączy to wszystko w jednym miejscu."
             />
           </FadeIn>
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            <FadeIn>
-              <div className="estats-panel h-full rounded-[1.9rem] p-6 sm:p-8">
-                <div className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  Dziś: Excel, WhatsApp i Dysk Google
+          <FadeIn delay={0.1}>
+            <div className="overflow-hidden rounded-[1.75rem] border border-border bg-card/40">
+              <div className="grid grid-cols-[minmax(0,1.5fr)_repeat(5,minmax(0,1fr))] items-stretch border-b border-border">
+                <div className="flex items-end py-4 pl-4 pr-2 text-[0.65rem] font-medium uppercase tracking-[0.12em] text-muted-foreground sm:pl-6">
+                  Co musisz ogarnąć
                 </div>
-                <ul className="mt-6 space-y-4 text-sm leading-6 text-muted-foreground">
-                  {comparisonRows.map((row) => (
-                    <li key={row.dzis} className="flex gap-3">
-                      <Minus className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/60" />
-                      <span>{row.dzis}</span>
-                    </li>
-                  ))}
-                </ul>
+                {compareTools.map((tool) => (
+                  <div
+                    key={tool.key}
+                    className="flex flex-col items-center justify-end px-1 py-4 text-center"
+                  >
+                    <span className="text-[0.7rem] font-medium leading-tight text-muted-foreground sm:text-sm">
+                      {tool.label}
+                    </span>
+                  </div>
+                ))}
+                <div className="flex flex-col items-center justify-end gap-1.5 border-l border-brand/15 bg-brand-soft/45 px-1 py-4 text-center">
+                  <img
+                    src="/estats-icon.png"
+                    alt="Logo Estats"
+                    className="h-5 w-5 object-contain"
+                  />
+                  <span className="text-[0.6rem] font-semibold leading-tight text-brand sm:text-xs">
+                    Estats
+                  </span>
+                </div>
               </div>
-            </FadeIn>
 
-            <FadeIn delay={0.1}>
-              <div className="estats-panel-strong h-full rounded-[1.9rem] p-6 sm:p-8">
-                <div className="text-xs font-medium uppercase tracking-[0.18em] text-brand">
-                  Z Estats
+              {compareMatrix.map((row) => (
+                <div
+                  key={row.feature}
+                  className="grid grid-cols-[minmax(0,1.5fr)_repeat(5,minmax(0,1fr))] items-stretch border-b border-border/50 last:border-b-0"
+                >
+                  <div className="flex items-center py-3.5 pl-4 pr-2 text-xs leading-snug text-foreground sm:pl-6 sm:text-sm">
+                    {row.feature}
+                  </div>
+                  <div className="flex items-center justify-center px-1 py-3.5">
+                    <CompareMark value={row.excel} />
+                  </div>
+                  <div className="flex items-center justify-center px-1 py-3.5">
+                    <CompareMark value={row.whatsapp} />
+                  </div>
+                  <div className="flex items-center justify-center px-1 py-3.5">
+                    <CompareMark value={row.drive} />
+                  </div>
+                  <div className="flex items-center justify-center px-1 py-3.5">
+                    <CompareMark value={row.trello} />
+                  </div>
+                  <div className="flex items-center justify-center border-l border-brand/15 bg-brand-soft/45 px-1 py-3.5">
+                    <CompareMark value={2} brand />
+                  </div>
                 </div>
-                <ul className="mt-6 space-y-4 text-sm leading-6 text-foreground">
-                  {comparisonRows.map((row) => (
-                    <li key={row.estats} className="flex gap-3">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                      <span>{row.estats}</span>
-                    </li>
-                  ))}
-                </ul>
+              ))}
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.15}>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5">
+                  <Check className="h-3.5 w-3.5 text-foreground/85" /> pełne
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Check className="h-3.5 w-3.5 text-muted-foreground/40" /> częściowe
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Minus className="h-3 w-3 text-muted-foreground/30" /> brak
+                </span>
               </div>
-            </FadeIn>
-          </div>
+              <p className="text-sm text-muted-foreground">
+                Zamiast kilku narzędzi, które ze sobą nie rozmawiają -{" "}
+                <span className="font-semibold text-brand">jeden Estats</span>.
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -1058,19 +1119,35 @@ function Index() {
             />
           </FadeIn>
 
-          <div className="grid gap-4 lg:grid-cols-4">
-            {timelineSteps.map((step, index) => (
-              <FadeIn key={step.step} delay={index * 0.08}>
-                <article className="estats-panel h-full rounded-[1.75rem] p-6">
-                  <div className="text-sm font-semibold text-brand">{step.step}</div>
-                  <div className="estats-gradient-line mt-5 h-px w-full" />
-                  <h3 className="mt-5 text-xl font-semibold tracking-tight text-foreground">
-                    {step.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-muted-foreground">{step.copy}</p>
-                </article>
-              </FadeIn>
-            ))}
+          <div className="relative mx-auto max-w-3xl">
+            <div
+              aria-hidden
+              className="absolute bottom-6 left-6 top-6 w-px bg-[linear-gradient(180deg,color-mix(in_oklab,var(--brand)_40%,transparent),var(--border),transparent)] lg:left-1/2 lg:-translate-x-px"
+            />
+            <div className="space-y-6 lg:space-y-10">
+              {timelineSteps.map((step, index) => {
+                const isLeft = index % 2 === 0;
+                return (
+                  <FadeIn key={step.step} delay={index * 0.06} y={28}>
+                    <div className="relative pl-[4.5rem] lg:grid lg:grid-cols-2 lg:gap-x-14 lg:pl-0">
+                      <div className="absolute left-0 top-1 z-10 flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/30 bg-brand-soft font-display text-lg font-semibold text-brand lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
+                        {step.step}
+                      </div>
+                      <div
+                        className={`estats-panel rounded-[1.5rem] p-6 ${
+                          isLeft ? "lg:col-start-1 lg:text-right" : "lg:col-start-2"
+                        }`}
+                      >
+                        <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+                          {step.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-7 text-muted-foreground">{step.copy}</p>
+                      </div>
+                    </div>
+                  </FadeIn>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
