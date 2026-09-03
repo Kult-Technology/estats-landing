@@ -21,6 +21,7 @@ import {
   Layers3,
   Lightbulb,
   Loader2,
+  LogIn,
   MessageSquare,
   Minus,
   Rocket,
@@ -35,6 +36,7 @@ import {
 
 import { getWaitlistCount, joinWaitlist } from "../lib/api/waitlist.functions";
 import { OG_IMAGE, OG_IMAGE_ALT, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, SITE_URL } from "../lib/seo";
+import { APP_URL } from "../lib/site";
 
 type FadeInProps = {
   children: React.ReactNode;
@@ -688,7 +690,7 @@ function Index() {
       <header className="relative z-20">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-6 lg:px-8">
           <EstatsLogo />
-          <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
+          <nav className="hidden items-center gap-8 text-sm text-muted-foreground lg:flex">
             <a href="#funkcje" className="transition-colors hover:text-foreground">
               Funkcje
             </a>
@@ -702,13 +704,30 @@ function Index() {
               Waitlista
             </a>
           </nav>
-          <a
-            href="#waitlista"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Dołącz do waitlisty
-            <ArrowRight className="h-4 w-4" />
-          </a>
+          <div className="flex items-center gap-3">
+            {/* For people who already have an account. Beside the nav it reads as one more
+                quiet link, because the page's job is still to collect sign-ups; on a phone,
+                where the nav is hidden and the waitlist pill below is not drawn, it takes
+                the pill treatment so the header still offers something to press. Anyone
+                with a live session never sees it - the session hint redirects them. */}
+            <a
+              href={APP_URL}
+              className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent sm:border-transparent sm:bg-transparent sm:px-2 sm:text-muted-foreground sm:hover:bg-transparent sm:hover:text-foreground"
+            >
+              <LogIn className="h-4 w-4" />
+              Zaloguj się
+            </a>
+            {/* The hero's own „Dołącz do waitlisty" button is above the fold on a phone and
+                this header does not stick, so a narrow screen would be drawing the same
+                call twice */}
+            <a
+              href="#waitlista"
+              className="hidden items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent sm:inline-flex"
+            >
+              Dołącz do waitlisty
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </header>
 
