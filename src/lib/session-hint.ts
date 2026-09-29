@@ -21,8 +21,9 @@ const hasSessionHint = (request: Request): boolean => {
 };
 
 // A crawler sends no cookie and so is never redirected, which is what keeps the marketing
-// page indexable — the home page is the site's canonical URL and its only sitemap entry.
-// /wypisz is reached from an e-mail by someone who may well be signed in, so only "/" here.
+// page indexable — the home page is the site's canonical URL.
+// /wypisz is reached from an e-mail by someone who may well be signed in, and the legal pages
+// are linked from inside the app, so only "/" here.
 export function signedInRedirect(request: Request): Response | undefined {
   if (request.method !== "GET") return undefined;
   if (!(request.headers.get("accept") ?? "").includes("text/html")) return undefined;

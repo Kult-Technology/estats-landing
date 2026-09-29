@@ -382,6 +382,211 @@
   }
 }
 
+/* Long-form legal text (/regulamin, /prywatnosc). In the components layer so a utility on an
+   element inside still wins. Polish drafting numbers a paragraph "1." and a point inside it
+   "1)", which the two list levels reproduce. */
+@layer components {
+  .legal-prose {
+    color: color-mix(in oklab, var(--foreground) 84%, var(--background));
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+
+  .legal-prose h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 1.6rem + 2vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+  }
+
+  .legal-prose .legal-effective {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+  }
+
+  .legal-prose section {
+    margin-top: 3rem;
+    scroll-margin-top: 1.5rem;
+  }
+
+  .legal-prose section > * + * {
+    margin-top: 1rem;
+  }
+
+  .legal-prose h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--foreground);
+  }
+
+  .legal-prose h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  .legal-prose strong {
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  .legal-prose a {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--brand) 70%, transparent);
+    text-underline-offset: 3px;
+    transition: color 180ms ease;
+  }
+
+  .legal-prose a:hover {
+    color: var(--brand);
+  }
+
+  .legal-prose ol {
+    counter-reset: item;
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .legal-prose ol > li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .legal-prose ol > li::before {
+    content: counter(item) ".";
+    position: absolute;
+    left: 0;
+    color: var(--muted-foreground);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .legal-prose li > ol {
+    gap: 0.375rem;
+    margin-top: 0.5rem;
+  }
+
+  .legal-prose li > ol > li {
+    padding-left: 1.75rem;
+  }
+
+  .legal-prose li > ol > li::before,
+  .legal-prose ol.points > li::before {
+    content: counter(item) ")";
+  }
+
+  .legal-prose ul {
+    display: grid;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .legal-prose ul > li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .legal-prose ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0.25rem;
+    top: 0.72em;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 999px;
+    background: var(--brand);
+  }
+
+  .legal-cards {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .legal-card {
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background: color-mix(in oklab, var(--card) 55%, transparent);
+    padding: 1rem 1.25rem 1.125rem;
+  }
+
+  .legal-card dl {
+    display: grid;
+    gap: 0.625rem;
+    margin-top: 0.75rem;
+  }
+
+  .legal-card dl > div {
+    display: grid;
+    gap: 0.125rem;
+  }
+
+  .legal-card dt {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  @media (min-width: 640px) {
+    .legal-card dl > div {
+      grid-template-columns: 9.5rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .legal-card dt {
+      padding-top: 0.2rem;
+    }
+  }
+
+  .legal-form {
+    display: grid;
+    gap: 0.75rem;
+    border: 1px dashed var(--border);
+    border-radius: 1rem;
+    padding: 1.25rem;
+  }
+
+  .legal-form__note {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+  }
+
+  .legal-form__blank {
+    display: inline-block;
+    min-width: 12rem;
+    border-bottom: 1px dotted var(--muted-foreground);
+    vertical-align: bottom;
+  }
+}
+
+/* A legal document is printed and saved as PDF: black on white, whatever the site theme */
+@media print {
+  body:has(.legal-page) {
+    background: #fff;
+  }
+
+  .legal-page {
+    --foreground: #000;
+    --background: #fff;
+    --muted-foreground: #444;
+    --border: #bbb;
+    --card: #fff;
+    --brand: #000;
+    background: #fff;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

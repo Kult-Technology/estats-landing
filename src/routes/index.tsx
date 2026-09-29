@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import {
@@ -34,6 +34,8 @@ import {
   Wrench,
 } from "lucide-react";
 
+import { EstatsLogo } from "../components/estats-logo";
+import { SiteFooter } from "../components/site-footer";
 import { getWaitlistCount, joinWaitlist } from "../lib/api/waitlist.functions";
 import { OG_IMAGE, OG_IMAGE_ALT, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, SITE_URL } from "../lib/seo";
 import { APP_URL } from "../lib/site";
@@ -415,23 +417,6 @@ function MockMetric({ label, value, tone = "default" }: MockMetricProps) {
       <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{label}</div>
       <div className="mt-2 text-2xl font-semibold tracking-tight">{value}</div>
     </div>
-  );
-}
-
-function EstatsLogo() {
-  return (
-    <a href="/" className="flex items-center gap-3" aria-label="Estats - strona główna">
-      <img
-        src="/estats-icon.png"
-        alt="Logo Estats"
-        width="1024"
-        height="1024"
-        className="h-8 w-8 shrink-0 object-contain sm:h-9 sm:w-9"
-      />
-      <span className="font-display text-xl font-semibold tracking-tight text-foreground">
-        Estats
-      </span>
-    </a>
   );
 }
 
@@ -1415,32 +1400,21 @@ function Index() {
                 , co nie wpływa na zgodność z prawem przetwarzania sprzed wycofania. Masz prawo
                 dostępu do danych, ich sprostowania, usunięcia lub ograniczenia przetwarzania oraz
                 wniesienia skargi do Prezesa UODO. Dane przechowujemy do czasu wycofania zgody lub
-                zakończenia zapisów na listę oczekujących.
+                zakończenia zapisów na listę oczekujących. Więcej w{" "}
+                <Link
+                  to="/prywatnosc"
+                  className="underline underline-offset-2 transition-colors hover:text-foreground"
+                >
+                  polityce prywatności
+                </Link>
+                .
               </p>
             </details>
           </FadeIn>
         </div>
       </section>
 
-      <footer className="relative z-10 border-t border-border px-5 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <EstatsLogo />
-          <div className="flex flex-col gap-1 sm:items-end">
-            <span>Estats - nowoczesna platforma do zarządzania flipami nieruchomości.</span>
-            <span>
-              Stworzone przez{" "}
-              <a
-                href="https://kulttechnology.pl"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-foreground underline-offset-4 transition-colors hover:text-brand hover:underline"
-              >
-                Kult Technology
-              </a>
-            </span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

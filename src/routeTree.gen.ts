@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WypiszRouteImport } from './routes/wypisz'
+import { Route as RegulaminRouteImport } from './routes/regulamin'
+import { Route as PrywatnoscRouteImport } from './routes/prywatnosc'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WypiszRoute = WypiszRouteImport.update({
   id: '/wypisz',
   path: '/wypisz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegulaminRoute = RegulaminRouteImport.update({
+  id: '/regulamin',
+  path: '/regulamin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrywatnoscRoute = PrywatnoscRouteImport.update({
+  id: '/prywatnosc',
+  path: '/prywatnosc',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +37,35 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/prywatnosc': typeof PrywatnoscRoute
+  '/regulamin': typeof RegulaminRoute
   '/wypisz': typeof WypiszRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/prywatnosc': typeof PrywatnoscRoute
+  '/regulamin': typeof RegulaminRoute
   '/wypisz': typeof WypiszRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/prywatnosc': typeof PrywatnoscRoute
+  '/regulamin': typeof RegulaminRoute
   '/wypisz': typeof WypiszRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/wypisz'
+  fullPaths: '/' | '/prywatnosc' | '/regulamin' | '/wypisz'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/wypisz'
-  id: '__root__' | '/' | '/wypisz'
+  to: '/' | '/prywatnosc' | '/regulamin' | '/wypisz'
+  id: '__root__' | '/' | '/prywatnosc' | '/regulamin' | '/wypisz'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PrywatnoscRoute: typeof PrywatnoscRoute
+  RegulaminRoute: typeof RegulaminRoute
   WypiszRoute: typeof WypiszRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/wypisz'
       fullPath: '/wypisz'
       preLoaderRoute: typeof WypiszRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/regulamin': {
+      id: '/regulamin'
+      path: '/regulamin'
+      fullPath: '/regulamin'
+      preLoaderRoute: typeof RegulaminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prywatnosc': {
+      id: '/prywatnosc'
+      path: '/prywatnosc'
+      fullPath: '/prywatnosc'
+      preLoaderRoute: typeof PrywatnoscRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PrywatnoscRoute: PrywatnoscRoute,
+  RegulaminRoute: RegulaminRoute,
   WypiszRoute: WypiszRoute,
 }
 export const routeTree = rootRouteImport
