@@ -15,9 +15,8 @@ import { SITE_URL } from "../seo";
 // credentials and the RESEND_API_KEY never reach the browser bundle.
 
 const WAITLIST_RECIPIENT = "kontakt@kulttechnology.pl";
-const WAITLIST_SENDER = "estats@kulttechnology.pl";
-// Branded "from" for the subscriber-facing thank-you (verified kulttechnology.pl domain).
-const WAITLIST_WELCOME_SENDER = "Estats <estats@kulttechnology.pl>";
+const WAITLIST_SENDER = "noreply@estats.pl";
+const WAITLIST_WELCOME_SENDER = "Estats No Reply <noreply@estats.pl>";
 
 // Social-proof baseline added to the real sign-up count before it is shown.
 // Change this single number to adjust the displayed starting point.
